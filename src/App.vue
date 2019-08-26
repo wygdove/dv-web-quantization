@@ -4,8 +4,8 @@
       <div class="headCont">
         <div class="headLogo">Quantization</div>
         <div class="headBanner">
-          <li v-for="item in banners" v-on:click="selected(item.name)">
-            <router-link class="listItem"  :class="{active:curBanner == item.name}"  :to="{name: item.name}" exact>{{item.title}}</router-link>
+          <li v-for="item in banners" v-on:click="bannerSelected(item.name)">
+            <router-link class="listItem" :class="{active:curBanner == item.name}" :to="{name: item.name}" exact>{{item.title}}</router-link>
           </li>
         </div>
       </div>
@@ -20,79 +20,40 @@
   </div>
 </template>
 <script>
+  import menu_config from "./config/menu_config.js"
   export default{
     components:{
     },
     name:'app',
-    data:function(){
+    data:function() {
       return{
-        banners:[
-          {
-            id:"Home",
-            name:"R_001",
-            title:"首页"
-          },
-          {
-            id:"Home",
-            name:"R_001",
-            title:"首页"
-          },
-          {
-            id:"Home",
-            name:"R_001",
-            title:"首页"
-          },
-          {
-            id:"Home",
-            name:"R_001",
-            title:"首页"
-          },
-          {
-            id:"Home",
-            name:"R_001",
-            title:"首页"
-          },
-          {
-            id:"Home",
-            name:"R_001",
-            title:"首页"
-          },
-          {
-            id:"Home",
-            name:"R_001",
-            title:"首页"
-          },
-          {
-            id:"Home",
-            name:"R_001",
-            title:"首页"
-          },
-          {
-            id:"Home",
-            name:"R_001",
-            title:"首页"
-          },
-          {
-            id:"Home",
-            name:"R_001",
-            title:"首页"
-          },
-          {
-            id:"Home",
-            name:"R_001",
-            title:"首页"
-          }
-        ],
-        curBanner:"Home"
+        banners:[],
+        curBanner:""
       }
     },
+    mounted() {
+      this.initMenu();
+    },
     methods:{
-      selected:function(seclctedName){
-        this.curBanner= seclctedName;
+      initMenu:function () {
+        let that=this;
+        that.banners=[];
+        for(var i in menu_config) {
+          var menu=menu_config[i];
+          if(menu.title) {
+           that.banners.push({name:menu.name,title:menu.title});
+          }
+        }
+        that.curBanner=that.banners[0];
       }
+    },
+    bannerSelected:function(seclctedName){
+      this.curBanner= seclctedName;
     }
   }
 </script>
+
+
 
 <style scoped>
   .banner{
@@ -164,6 +125,7 @@
 
   .bodyContainer{
     height: calc(100% - 50px);
+    padding: 10px;
   }
 
   .bodyCont{
