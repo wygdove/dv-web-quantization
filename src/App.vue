@@ -1,60 +1,184 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
+  <div id="app" class="banner">
+    <div class="headContainer">
+      <div class="headCont">
+        <div class="headLogo">Quantization</div>
+        <div class="headBanner">
+          <li v-for="item in banners" v-on:click="selected(item.name)">
+            <router-link class="listItem"  :class="{active:curBanner == item.name}"  :to="{name: item.name}" exact>{{item.title}}</router-link>
+          </li>
+        </div>
+      </div>
+    </div>
+    <div class="bodyContainer">
+      <div class="bodyCont">
+        <transition name="fade">
+          <router-view></router-view>
+        </transition>
+      </div>
+    </div>
   </div>
 </template>
-
 <script>
-export default {
-  name: 'app',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
+  export default{
+    components:{
+    },
+    name:'app',
+    data:function(){
+      return{
+        banners:[
+          {
+            id:"Home",
+            name:"R_001",
+            title:"首页"
+          },
+          {
+            id:"Home",
+            name:"R_001",
+            title:"首页"
+          },
+          {
+            id:"Home",
+            name:"R_001",
+            title:"首页"
+          },
+          {
+            id:"Home",
+            name:"R_001",
+            title:"首页"
+          },
+          {
+            id:"Home",
+            name:"R_001",
+            title:"首页"
+          },
+          {
+            id:"Home",
+            name:"R_001",
+            title:"首页"
+          },
+          {
+            id:"Home",
+            name:"R_001",
+            title:"首页"
+          },
+          {
+            id:"Home",
+            name:"R_001",
+            title:"首页"
+          },
+          {
+            id:"Home",
+            name:"R_001",
+            title:"首页"
+          },
+          {
+            id:"Home",
+            name:"R_001",
+            title:"首页"
+          },
+          {
+            id:"Home",
+            name:"R_001",
+            title:"首页"
+          }
+        ],
+        curBanner:"Home"
+      }
+    },
+    methods:{
+      selected:function(seclctedName){
+        this.curBanner= seclctedName;
+      }
     }
   }
-}
 </script>
 
-<style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style scoped>
+  .banner{
+    height:100%;
+    display: block;
+  }
+  .headContainer{
+    height: 50px;
+    background-color:#333;
+  }
+  .headCont{
+    height: 50px;
+  }
+  .headContainer .headLogo{
+    width: 30%;
+    height: 50px;
+    float: left;
+    display: inline-block;
+    font-size: 34px;
+    padding-left: 20px;
+    text-align: left;
+    vertical-align: top;
+    color: #fff;
+    text-shadow: 4px 3px 3px #fa0;
+    line-height: 50px;
+    font-family: "Lucida Calligraphy";
+  }
+  .headBanner li{
+    float: right;
+    display: table;
+  }
 
-h1, h2 {
-  font-weight: normal;
-}
+  .headContainer .headBanner{
+    width: 65%;
+    float: right;
+    padding-right: 30px;
+    display: inline-block;
+    text-align: right;
+    height: 50px;
+    line-height: 50px;
+  }
+  a{
+    text-decoration: none;
+  }
+  .listItem{
+    font-size: 14px;
+    color: #fff;
+    height: 30px;
+    line-height: 30px;
+    padding: 4px 10px;
+    margin: 0 6px;
+    cursor: pointer;
+  }
+  .listItem:hover{
+    font-size: 16px;
+  }
+  .headBanner li a:hover{
+    font-size: 16px;
+    /*background:#00aaff;*/
+  }
+  .headBanner li a:active{
+    background:#00aaff;
+  }
 
-ul {
-  list-style-type: none;
-  padding: 0;
-}
+  .active{
+    /*background:#00aaff;*/
+    color: #fa0;
+  }
 
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
+  .bodyContainer{
+    height: calc(100% - 50px);
+  }
 
-a {
-  color: #42b983;
-}
+  .bodyCont{
+    background: #fff;
+    height: 100%;
+  }
+  /*.router-link-active{*/
+  /*!*background:#00aaff;*!*/
+  /*color: #fa0;*/
+  /*}*/
+  .fade-enter-active, .fade-leave-active {
+    transition: all 0.3s ease
+  }
+
+  .fade-enter, .fade-leave-active {
+    opacity: 0
+  }
 </style>
