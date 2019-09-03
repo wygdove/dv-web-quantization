@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="r001Chart-All" style="width:1500px;height:300px;"></div>
+    <div id="r001Chart-All" style="width:1500px;height:600px;"></div>
     <br/>
     <br/>
     <br/>
@@ -39,7 +39,7 @@
         var xMax=50*1000;
         var yMax=50;
 
-        for(var i=2600;i<xMax;i++) {
+        for(var i=0;i<xMax;i++) {
           that.xAxisData.push(i/1000);
         }
         for(var i=1;i<50;i++) {
@@ -108,7 +108,7 @@
         var xMax=50*1000;
         var yMax=50;
 
-        for(var i=2600;i<=xMax;i++) {
+        for(var i=0;i<=xMax;i++) {
           that.xAxisData.push(i/1000);
         }
         for(var i=1;i<50;i++) {
@@ -127,6 +127,7 @@
             scharge=Math.round(scharge*100)/100;
             svalue-=scharge;
             svalue=Math.round(svalue*100)/100;
+            svalue=svalue<0?0:svalue;
             that.seriesData.push(svalue);
           }
           var seriesOne={
@@ -140,7 +141,7 @@
         }
         var legendselected={};
         for(var i in legendData) {
-          legendselected[legendData[i]]=i<3;
+          legendselected[legendData[i]]=i<5;
         }
 
         var r001Option={
@@ -149,7 +150,11 @@
             formatter:function(params) {
               var res="";
               for(var i=params.length-1;i>=0;i--) {
-                res+=params[i].seriesName+'元 年化收益率'+params[i].name+'% 收益'+params[i].data+'<br />';
+                var money=params[i].seriesName;
+                var rate=params[i].name;
+                var netearnings=params[i].data;
+                var earnings=Math.round((netearnings+money*0.00001)*100)/100;
+                res+=money+'元&nbsp;年化收益率'+rate+'%&nbsp;收益'+earnings+'&nbsp;净收益'+netearnings+'<br />';
               }
               return res;
             }
@@ -161,7 +166,6 @@
                 yAxisIndex: 'none'
               },
               dataView: {readOnly: false},
-              magicType: {type: ['line', 'bar']},
               restore: {},
             }
           },
@@ -173,8 +177,8 @@
             {
               show: true,
               realtime: true,
-              start: 0.5,
-              end: 1.2
+              startValue: 2*1000, // startValue -> data[startValue]
+              endValue: 3.5*1000
             }
           ],
           xAxis: {
