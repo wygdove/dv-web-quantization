@@ -1,24 +1,47 @@
 <template>
-  <div id="app" class="banner">
-    <div class="headContainer">
-      <div class="headCont">
-        <div class="headLogo">Quantization</div>
-        <div class="headBanner">
-          <li v-for="item in banners" v-on:click="bannerSelected(item.name)">
-            <router-link class="listItem" :class="{active:curBanner == item.name}" :to="{name: item.name}" exact>{{item.title}}</router-link>
-          </li>
+  <div id="app" style="height:900px;">
+    <el-container style="height:90%;border:1px solid #eee;">
+      <el-aside width="200px">
+        <div class="headLogo bg" @click="dealCollapse()">Quantization</div>
+        <div style="margin-top:60px;">
+          <el-menu :unique-opened="qmenu.uniqueOpened" :router="qmenu.isRouterModel" :collapse="qmenu.isCollapse" background-color="rgb(238,241,246)">
+            <el-submenu v-for="(item,i) in qmenu.banners" v-bind:key="item.name" :index="'menu'+(i+1)+''">
+              <template slot="title"><i class="el-icon-menu"></i>{{item.title}}</template>
+              <el-menu-item-group>
+                <el-menu-item v-for="(subitem,j) in item.children" :route="subitem" v-bind:key="subitem.name"
+                              :index="'menu'+(i+1)+'-'+(j+1)">{{subitem.title}}</el-menu-item>
+              </el-menu-item-group>
+            </el-submenu>
+          </el-menu>
         </div>
-      </div>
-    </div>
-    <div class="bodyContainer">
-      <div class="bodyCont">
-        <transition name="fade">
-          <router-view></router-view>
-        </transition>
-      </div>
-    </div>
+      </el-aside>
+
+      <el-container>
+        <el-header class="bg" style="text-align:right;font-size:12px">
+          <el-dropdown>
+            <i class="el-icon-setting" style="margin-right:15px"></i>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item>查看</el-dropdown-item>
+              <el-dropdown-item>新增</el-dropdown-item>
+              <el-dropdown-item>删除</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+          <span>王小虎</span>
+        </el-header>
+
+        <el-main>
+
+          <div>lalallalalalla</div>
+          <div>
+            <transition name="fade"><router-view ></router-view></transition>
+          </div>
+        </el-main>
+      </el-container>
+    </el-container>
+
   </div>
 </template>
+
 <script>
   import menu_config from "./config/menu_config.js"
   export default{
@@ -27,8 +50,13 @@
     name:'app',
     data:function() {
       return{
-        banners:[],
-        curBanner:""
+        qmenu:{
+          banners:[],
+          curBanner:"",
+          isCollapse: false,
+          uniqueOpened: true,
+          isRouterModel: true,
+        },
       }
     },
     mounted() {
@@ -37,110 +65,37 @@
     methods:{
       initMenu:function () {
         let that=this;
-        that.banners=[];
-        for(var i in menu_config) {
-          var menu=menu_config[i];
-          if(menu.title) {
-           that.banners.push({name:menu.name,title:menu.title});
-          }
-        }
-        that.curBanner=that.banners[0];
-      }
+        that.qmenu.banners=menu_config;
+      },
+      dealCollapse:function() {
+        let that=this;
+        that.qmenu.isCollapse=!that.qmenu.isCollapse;
+      },
+
+
+
     },
-    bannerSelected:function(seclctedName){
-      this.curBanner= seclctedName;
-    }
   }
 </script>
 
 
 
 <style scoped>
-  .banner{
-    height:100%;
-    display: block;
-  }
-  .headContainer{
-    height: 50px;
-    background-color:#333;
-  }
-  .headCont{
-    height: 50px;
-  }
-  .headContainer .headLogo{
-    width: 30%;
-    height: 50px;
+  .headLogo{
+    width: 200px;
+    height: 60px;
     float: left;
     display: inline-block;
-    font-size: 34px;
-    padding-left: 20px;
+    font-size: 30px;
+    padding-left: 10px;
     text-align: left;
     vertical-align: top;
-    color: #fff;
-    text-shadow: 4px 3px 3px #fa0;
+    color: #409EFF;
+    /*text-shadow: 4px 3px 8px #409EFF;*/
     line-height: 50px;
     font-family: "Lucida Calligraphy";
   }
-  .headBanner li{
-    float: right;
-    display: table;
-  }
-
-  .headContainer .headBanner{
-    width: 65%;
-    float: right;
-    padding-right: 30px;
-    display: inline-block;
-    text-align: right;
-    height: 50px;
-    line-height: 50px;
-  }
-  a{
-    text-decoration: none;
-  }
-  .listItem{
-    font-size: 14px;
-    color: #fff;
-    height: 30px;
-    line-height: 30px;
-    padding: 4px 10px;
-    margin: 0 6px;
-    cursor: pointer;
-  }
-  .listItem:hover{
-    font-size: 16px;
-  }
-  .headBanner li a:hover{
-    font-size: 16px;
-    /*background:#00aaff;*/
-  }
-  .headBanner li a:active{
-    background:#00aaff;
-  }
-
-  .active{
-    /*background:#00aaff;*/
-    color: #fa0;
-  }
-
-  .bodyContainer{
-    height: calc(100% - 50px);
-    padding: 10px;
-  }
-
-  .bodyCont{
-    background: #fff;
-    height: 100%;
-  }
-  /*.router-link-active{*/
-  /*!*background:#00aaff;*!*/
-  /*color: #fa0;*/
-  /*}*/
-  .fade-enter-active, .fade-leave-active {
-    transition: all 0.3s ease
-  }
-
-  .fade-enter, .fade-leave-active {
-    opacity: 0
+  .bg {
+    background-color:rgb(238,241,246)
   }
 </style>
