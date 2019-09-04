@@ -13,7 +13,7 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          'vue-style-loader',
+          'style-loader',
           'css-loader'
         ],
       },
@@ -58,14 +58,26 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        exclude: /node_modules/
-      },
-      {
-        test: /\.(png|jpg|gif|svg)$/,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]?[hash]'
+        exclude: /node_modules/,
+        options:{
+          plugins:['syntax-dynamic-import']
         }
+      },
+      // {
+      //   test: /\.(png|jpg|gif|svg)$/,
+      //   loader: 'file-loader',
+      //   options: {
+      //     name: '[name].[ext]?[hash]'
+      //   }
+      // },
+      {
+        test: /\.(png|jpg|jpeg|gif|eot|ttf|woff|woff2|svg|svgz)(\?.+)?$/,
+        use: [{
+          loader: 'url-loader',
+          options: {
+            limit: 10000
+          }
+        }]
       }
     ]
   },
@@ -75,10 +87,28 @@ module.exports = {
     },
     extensions: ['*', '.js', '.vue', '.json']
   },
+  // devServer: {
+  //   historyApiFallback: true,
+  //   noInfo: true,
+  //   overlay: true
+  // },
   devServer: {
-    historyApiFallback: true,
-    noInfo: true,
-    overlay: true
+    host: '127.0.0.1',
+    port: 8010,
+    proxy: {
+      '/api/': {
+        target: 'http://127.0.0.1:8080',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': ''
+        }
+      },
+      '/ndebtdata': {
+        target: 'https://cn.investing.com/common/modules/js_instrument_chart/api/data.php',
+        changeOrigin: true
+      }
+    },
+    historyApiFallback: true
   },
   performance: {
     hints: false
