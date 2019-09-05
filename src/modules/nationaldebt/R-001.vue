@@ -1,19 +1,19 @@
 <template>
   <div>
-    <div id="r001Chart-All" style="width:1500px;height:600px;"></div>
+    <div id="r001Chart-All"style="width:1300px;height:600px;"></div>
     <br/>
     <br/>
     <br/>
-    <div id="r001Chart-1000" style="width:1500px;height:300px;"></div>
-    <div id="r001Chart-2000" style="width:1500px;height:300px;"></div>
-    <div id="r001Chart-3000" style="width:1500px;height:300px;"></div>
-    <div id="r001Chart-4000" style="width:1500px;height:300px;"></div>
-    <div id="r001Chart-5000" style="width:1500px;height:300px;"></div>
-    <div id="r001Chart-6000" style="width:1500px;height:300px;"></div>
-    <div id="r001Chart-7000" style="width:1500px;height:300px;"></div>
-    <div id="r001Chart-8000" style="width:1500px;height:300px;"></div>
-    <div id="r001Chart-9000" style="width:1500px;height:300px;"></div>
-    <div id="r001Chart-10000" style="width:1500px;height:300px;"></div>
+    <div id="r001Chart-1000"style="width:1300px;height:300px;"></div>
+    <div id="r001Chart-2000"style="width:1300px;height:300px;"></div>
+    <div id="r001Chart-3000"style="width:1300px;height:300px;"></div>
+    <div id="r001Chart-4000"style="width:1300px;height:300px;"></div>
+    <div id="r001Chart-5000"style="width:1300px;height:300px;"></div>
+    <div id="r001Chart-6000"style="width:1300px;height:300px;"></div>
+    <div id="r001Chart-7000"style="width:1300px;height:300px;"></div>
+    <div id="r001Chart-8000"style="width:1300px;height:300px;"></div>
+    <div id="r001Chart-9000"style="width:1300px;height:300px;"></div>
+    <div id="r001Chart-10000"style="width:1300px;height:300px;"></div>
   </div>
 </template>
 
