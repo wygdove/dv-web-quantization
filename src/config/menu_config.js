@@ -1,6 +1,11 @@
 
 const menu_config=[
   {
+    path: '/',
+    redirect: '/index',
+    show: 'false'
+  },
+  {
     title: '主页',
     name: 'index',
     path: '/index',
@@ -33,8 +38,8 @@ const menu_config=[
     component: () => import('../modules/index/index'),
     children: [
       {
-        title: '深交一天',
-        name: 'R-001',
+        title: '日账单',
+        name: 'dailyaccount',
         path: '/account/dailyaccount',
         component: () => import('../modules/account/dailyaccount'),
       },
