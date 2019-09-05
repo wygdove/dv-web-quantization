@@ -23,6 +23,7 @@
     name: "R-001",
     data () {
       return {
+        earnday:1,
         xAxisData:[],
         xAxisData2:[],
         yAxisData:[],
@@ -107,6 +108,7 @@
         let that=this;
         var xMax=50*1000;
         var yMax=50;
+        that.getEarnDay();
 
         for(var i=0;i<=xMax;i++) {
           that.xAxisData.push(i/1000);
@@ -121,7 +123,7 @@
         for(var y=0;y<10;y++) {
           that.seriesData=[];
           for(var x=0;x<that.xAxisData.length;x++) {
-            var svalue=that.yAxisData[y]*that.xAxisData[x]/100*1/365;
+            var svalue=that.yAxisData[y]*that.xAxisData[x]/100*that.earnday/365;
             svalue=Math.round(svalue*100)/100;
             var scharge=that.yAxisData[y]*0.001/100;
             scharge=Math.round(scharge*100)/100;
@@ -196,6 +198,14 @@
 
         let r001Chart=echarts.init(document.getElementById('r001Chart-All'));
         r001Chart.setOption(r001Option);
+      },
+      getEarnDay:function() {
+        let that=this;
+        var today=new Date();
+        var dayOfWeek=today.getDay();
+        if(dayOfWeek===4) {
+          that.earnday=3;
+        }
       }
 
 
