@@ -55,7 +55,6 @@
           stockCodes:stockCodes,
           metrics:["pe_ttm.y_10.weightedAvg","pb.y_10.weightedAvg","cp","mc"]
         }).then(res => {
-          console.log(res);
           if(res&&res.code===0&&res.data) {
             var data=res.data;
             for(var i in data) {
@@ -65,9 +64,6 @@
               data[i].pb.y_10.weightedAvg.latestValPosPer=(data[i].pb.y_10.weightedAvg.latestValPos*100).toFixed(2);
               that.collapseData.push(data[i]);
             }
-          }
-          for(var indice in that.indices) {
-
           }
         });
       },

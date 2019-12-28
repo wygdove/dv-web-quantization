@@ -7,9 +7,8 @@ import config from './config';
 axios.interceptors.request.use(
 	config => {
     config.headers['X-Requested-With']='XMLHttpRequest';
-		if(!sessionStorage.tokenId) {
-			sessionStorage.tokenId='';
-		}
+    // config.headers['Access-Control-Allow-Origin']='true';
+    // config.headers['Accept']='application/json';
 		return config;
 	},
 	err => {
