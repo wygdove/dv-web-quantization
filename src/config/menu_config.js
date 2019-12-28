@@ -51,6 +51,20 @@ const menu_config=[
       },
     ]
   },
+  {
+    title: '股票',
+    name: 'stock',
+    path: '/stock',
+    component: () => import('../modules/index/index'),
+    children: [
+      {
+        title: '大盘',
+        name: 'market',
+        path: '/stock/market',
+        component: () => import('../modules/stock/market'),
+      }
+    ]
+  },
 
 
 
