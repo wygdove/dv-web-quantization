@@ -43,6 +43,12 @@ const menu_config=[
         path: '/account/dailyaccount',
         component: () => import('../modules/account/dailyaccount'),
       },
+      {
+        title: '账本配置',
+        name: 'classConfig',
+        path: '/account/accountConfig/classConfig',
+        component: () => import('../modules/account/accountConfig/classConfig'),
+      },
     ]
   },
 
