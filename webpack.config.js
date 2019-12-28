@@ -87,16 +87,11 @@ module.exports = {
     },
     extensions: ['*', '.js', '.vue', '.json']
   },
-  // devServer: {
-  //   historyApiFallback: true,
-  //   noInfo: true,
-  //   overlay: true
-  // },
   devServer: {
     host: '127.0.0.1',
     port: 8010,
     proxy: {
-      '/api/': {
+      '/api': {
         target: 'http://127.0.0.1:8080',
         changeOrigin: true,
         pathRewrite: {
@@ -105,8 +100,16 @@ module.exports = {
       },
       '/ndebtdata': {
         target: 'https://cn.investing.com/common/modules/js_instrument_chart/api/data.php',
-        changeOrigin: true
-      }
+        changeOrigin: true,
+        pathRewrite: { '^/ndebtdata': '' },
+        secure: false
+      },
+      '/lixinger': {
+        target: 'https://open.lixinger.com/api/',
+        changeOrigin: true,
+        pathRewrite: { '^/lixinger': '' },
+        secure: false
+      },
     },
     historyApiFallback: true
   },
@@ -114,11 +117,10 @@ module.exports = {
     hints: false
   },
   devtool: '#eval-source-map'
-}
+};
 
-if (process.env.NODE_ENV === 'production') {
+if(process.env.NODE_ENV === 'production') {
   module.exports.devtool = '#source-map'
-  // http://vue-loader.vuejs.org/en/workflow/production.html
   module.exports.plugins = (module.exports.plugins || []).concat([
     new webpack.DefinePlugin({
       'process.env': {

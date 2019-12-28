@@ -32,8 +32,26 @@ export default {
 
 
 
-  getToday:function(timestamp) {
+  getToday:function() {
     var date=new Date();
+    var year=date.getFullYear();
+    var month=date.getMonth()+1;
+    var day=date.getDate();
+    if(month.toString().length==1)month="0"+month;
+    if(day.toString().length==1)day="0"+day;
+    return year+"-"+month+"-"+day;
+  },
+
+  getLastWorkDay:function() {
+    var yesterday=new Date();
+    if(yesterday.getDay()===0){
+      yesterday.setDate(yesterday.getDate()-2);
+    }else if(yesterday.getDay()===1){
+      yesterday.setDate(yesterday.getDate()-3);
+    }else{
+      yesterday.setDate(yesterday.getDate()-1);
+    }
+    var date=new Date(yesterday);
     var year=date.getFullYear();
     var month=date.getMonth()+1;
     var day=date.getDate();

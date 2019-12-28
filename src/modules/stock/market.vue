@@ -1,49 +1,15 @@
 <template>
   <div>
     <el-collapse @change="handleChange" v-model="activeName">
-
-      <el-collapse-item name="000300">
+      <el-collapse-item  v-for="(item,index) in collapseData" :name="item.code">
         <template slot="title">
-          <div class="ml-10 coll-title">沪深300</div>
-          <div class="ml-10">PE-TTM 分位点：<span>52.26%</span></div>
-          <div class="ml-10">PB 分位点：<span>33.80%</span></div>
+          <div class="ml-10 coll-title">{{item.name}}</div>
+          <div class="ml-10">PE-TTM 分位点：<span>{{item.pe_ttm.y_10.weightedAvg.latestValPosPer}}%</span></div>
+          <div class="ml-10">PB 分位点：<span>{{item.pb.y_10.weightedAvg.latestValPosPer}}%</span></div>
+          <div class="ml-10">收盘点位：<span>{{item.cp}}</span></div>
         </template>
         <div></div>
       </el-collapse-item>
-      <el-collapse-item name="000905">
-        <template slot="title">
-          <div class="ml-10 coll-title">中证500</div>
-          <div class="ml-10">PE-TTM 分位点：<span>12.91%</span></div>
-          <div class="ml-10">PB 分位点：<span>7.73%</span></div>
-        </template>
-        <div></div>
-      </el-collapse-item>
-      <el-collapse-item name="1000004">
-        <template slot="title">
-          <div class="ml-10 coll-title">上证指数</div>
-          <div class="ml-10">PE-TTM 分位点：<span>44.65%</span></div>
-          <div class="ml-10">PB 分位点：<span>15.58%</span></div>
-        </template>
-        <div></div>
-      </el-collapse-item>
-      <el-collapse-item name="399001">
-        <template slot="title">
-          <div class="ml-10 coll-title">深证成指</div>
-          <div class="ml-10">PE-TTM 分位点：<span>63.73%</span></div>
-          <div class="ml-10">PB 分位点：<span>43.54%</span></div>
-        </template>
-        <div></div>
-      </el-collapse-item>
-      <el-collapse-item name="399006">
-        <template slot="title">
-          <div class="ml-10 coll-title">创业板指</div>
-          <div class="ml-10">PE-TTM 分位点：<span>48.82%</span></div>
-          <div class="ml-10">PB 分位点：<span>65.39%</span></div>
-        </template>
-        <div></div>
-      </el-collapse-item>
-
-
     </el-collapse>
   </div>
 </template>
@@ -55,8 +21,16 @@
     name: "market",
     data () {
       return {
-        market:[],
-      activeName: ['000300','000905']
+        market:{},
+        indices:{
+          "000300":"沪深300",
+          "000905":"中证500",
+          "1000004":"上证指数",
+          "399001":"深证成指",
+          "399006":"创业板指"
+        },
+        collapseData:[],
+        activeName:[]
       }
     },
     mounted() {
@@ -64,26 +38,36 @@
     },
     methods:{
       initFrame:function() {
+        var that=this;
         this.initData();
       },
       initData:function() {
-        this.$post(this.$api.url.require.common.getBusiRegList,{
-          type:type,
-          code:code
+        var that=this;
+        var stockCodes=[];
+        for(var indice in that.indices) {
+          stockCodes.push(indice);
+        }
+        // this.$post(this.$api.url.lixinger.astock.fundamental,{
+        that.$post("lixinger/a/indice/fundamental",{
+          // token:this.$api.url.lixinger.token,
+          token:"fca422e3-2818-47d1-b784-62e87d097349",
+          date:that.CommonUtil.getLastWorkDay(),
+          stockCodes:stockCodes,
+          metrics:["pe_ttm.y_10.weightedAvg","pb.y_10.weightedAvg","cp","mc"]
         }).then(res => {
-          that.isShowBusiRegFourLoading=false;
-          if(!CommonUtil.isNullObj(res)&&!CommonUtil.isNullObj(res.status)
-            &&res.status==0&&!CommonUtil.isNullObj(res.obj)) {
-            var regData=res.obj;
-            if(regData.length>0) {
-              if(regData[0].type==that.busiRegTypes[0]) {
-                that.setBusiRegData(regData[0].type,regData[0].code,regData[0].name);
-              }
-              for(var i in regData) {
-                regData[i].text=regData[i].name;
-                that.busiRegTabData.push(regData[i]);
-              }
+          console.log(res);
+          if(res&&res.code===0&&res.data) {
+            var data=res.data;
+            for(var i in data) {
+              data[i].code=data[i].stockCode;
+              data[i].name=that.indices[data[i].stockCode];
+              data[i].pe_ttm.y_10.weightedAvg.latestValPosPer=(data[i].pe_ttm.y_10.weightedAvg.latestValPos*100).toFixed(2);
+              data[i].pb.y_10.weightedAvg.latestValPosPer=(data[i].pb.y_10.weightedAvg.latestValPos*100).toFixed(2);
+              that.collapseData.push(data[i]);
             }
+          }
+          for(var indice in that.indices) {
+
           }
         });
       },

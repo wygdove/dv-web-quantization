@@ -54,7 +54,7 @@ export function fetch(url,params={}) {
 /**
  * 封装post请求
  */
-export function j_post(url,data = {}) {
+export function post(url,data = {}) {
   return new Promise((resolve,reject) => {
     axios.post(config.baseURL+url,data)
       .then(response => {
