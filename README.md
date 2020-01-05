@@ -1,6 +1,6 @@
-# quantization
+# dv-web-quantization
 
-> quantization
+> dv-web-quantization
 
 ## Build Setup
 
