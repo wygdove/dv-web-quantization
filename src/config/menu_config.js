@@ -62,6 +62,12 @@ const menu_config=[
         name: 'market',
         path: '/stock/market',
         component: () => import('../modules/stock/market'),
+      },
+      {
+        title: '长投白马股',
+        name: 'whiteHorse',
+        path: '/stock/whiteHorse',
+        component: () => import('../modules/stock/whiteHorse'),
       }
     ]
   },
