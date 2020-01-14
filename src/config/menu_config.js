@@ -21,13 +21,13 @@ const menu_config=[
         title: '深交一天',
         name: 'R-001',
         path: '/nationaldebt/R-001',
-        component: () => import('../modules/nationaldebt/R-001'),
+        component: () => import('../modules/nationaldebt/R-001')
       },
       {
         title: '国债',
         name: 'ndebt',
         path: '/nationaldebt/ndebt',
-        component: () => import('../modules/nationaldebt/ndebt'),
+        component: () => import('../modules/nationaldebt/ndebt')
       }
     ]
   },
@@ -41,14 +41,20 @@ const menu_config=[
         title: '日账单',
         name: 'dailyaccount',
         path: '/account/dailyaccount',
-        component: () => import('../modules/account/dailyaccount'),
+        component: () => import('../modules/account/dailyaccount')
       },
       {
         title: '账本配置',
         name: 'classConfig',
         path: '/account/accountConfig/classConfig',
-        component: () => import('../modules/account/accountConfig/classConfig'),
+        component: () => import('../modules/account/accountConfig/classConfig')
       },
+      {
+        title: '用户账本',
+        name: 'userAccount',
+        path: '/account/userAccount',
+        component: () => import('../modules/account/userAccount')
+      }
     ]
   },
   {
@@ -61,13 +67,13 @@ const menu_config=[
         title: '大盘',
         name: 'market',
         path: '/stock/market',
-        component: () => import('../modules/stock/market'),
+        component: () => import('../modules/stock/market')
       },
       {
         title: '长投白马股',
         name: 'whiteHorse',
         path: '/stock/whiteHorse',
-        component: () => import('../modules/stock/whiteHorse'),
+        component: () => import('../modules/stock/whiteHorse')
       }
     ]
   },
