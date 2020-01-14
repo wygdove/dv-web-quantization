@@ -94,4 +94,36 @@ export default {
 
 
 
+
+
+
+
+  showInfo:function(msg) {
+    if(this.isNullStr(msg)) msg="";
+    this.$message({message:msg,showClose:true});
+  },
+  showSuccess:function(msg) {
+    if(this.isNullStr(msg)) msg="操作成功!";
+    this.$message({type:'success',message:msg,showClose:true});
+  },
+  showWarning:function(msg) {
+    if(this.isNullStr(msg)) msg="操作失败!";
+    this.$message({type:'warning',message:msg,showClose:true,duration:5000});
+  },
+  showError:function(msg) {
+    if(this.isNullStr(msg)) msg="";
+    this.$message({type:'error',message:msg,showClose:true,duration:5000});
+  }
+
+
+
+
+
+
+
+
+
+
+
+
 }
