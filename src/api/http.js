@@ -18,16 +18,20 @@ axios.interceptors.request.use(
 
 
 axios.interceptors.response.use(function(response) {
-  var res=response.data;
-  if(res&&res.code==="000000"&&res.result) {
-    return response;
-  } else {
-    var msg="操作失败！";
-    if(res&&res.message!=="") {
-      msg=res.message;
+  if(response&&response.config&&response.config.url&&
+    response.config.url.startsWith("/api/")&&response.data) {
+    var res=response.data;
+    if(res.code==="000000"&&res.result) {
+      return response;
+    } else {
+      var msg="操作失败！";
+      if(res&&res.message!=="") {
+        msg=res.message;
+      }
+      Message({type:'error',message:msg,showClose:true,duration:5000});
     }
-    Message({type:'error',message:msg,showClose:true,duration:5000});
   }
+  return response;
 },function(error) {
 	console.error(error);
 });
