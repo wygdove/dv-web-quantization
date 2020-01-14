@@ -3,10 +3,10 @@
     <el-collapse @change="handleChange" v-model="activeName">
       <el-collapse-item  v-for="(item,index) in collapseData" :name="item.code">
         <template slot="title">
-          <div class="ml-10 coll-title">{{item.name}}</div>
-          <div class="ml-10">PE-TTM 分位点：<span>{{item.pe_ttm.y_10.weightedAvg.latestValPosPer}}%</span></div>
-          <div class="ml-10">PB 分位点：<span>{{item.pb.y_10.weightedAvg.latestValPosPer}}%</span></div>
-          <div class="ml-10">收盘点位：<span>{{item.cp}}</span></div>
+          <div class="ml-10 mw-6p  coll-title">{{item.name}}</div>
+          <div class="ml-10 mw-10p">收盘点位：<span>{{item.cp}}</span></div>
+          <div class="ml-10 mw-13p">PE-TTM 分位点：<span>{{item.pe_ttm.y_10.weightedAvg.latestValPosPer}}%</span></div>
+          <div class="ml-10 mw-11p">PB 分位点：<span>{{item.pb.y_10.weightedAvg.latestValPosPer}}%</span></div>
         </template>
         <div></div>
       </el-collapse-item>
@@ -23,12 +23,13 @@
       return {
         market:{},
         indices:{
-          "000300":"沪深300",
-          "000905":"中证500",
           "1000004":"上证指数",
           "399001":"深证成指",
-          "399006":"创业板指"
+          "399006":"创业板指",
+          "000300":"沪深300",
+          "000905":"中证500"
         },
+        indiceList:["1000004","399001","399006","000300","000905"],
         collapseData:[],
         activeName:[]
       }
@@ -43,6 +44,7 @@
       },
       initData:function() {
         var that=this;
+        that.collapseData=[];
         var stockCodes=[];
         for(var indice in that.indices) {
           stockCodes.push(indice);
@@ -57,12 +59,16 @@
         }).then(res => {
           if(res&&res.code===0&&res.data) {
             var data=res.data;
+            var tempdata={}
             for(var i in data) {
               data[i].code=data[i].stockCode;
               data[i].name=that.indices[data[i].stockCode];
               data[i].pe_ttm.y_10.weightedAvg.latestValPosPer=(data[i].pe_ttm.y_10.weightedAvg.latestValPos*100).toFixed(2);
               data[i].pb.y_10.weightedAvg.latestValPosPer=(data[i].pb.y_10.weightedAvg.latestValPos*100).toFixed(2);
-              that.collapseData.push(data[i]);
+              tempdata[data[i].code]=data[i];
+            }
+            for(var i in that.indiceList) {
+              that.collapseData.push(tempdata[that.indiceList[i]]);
             }
           }
         });
@@ -92,6 +98,23 @@
     font-size:15px;
     color:#409EFF;
   }
+
+  .mw-6p {
+    min-width:6%;
+  }
+  .mw-10p {
+    min-width:10%;
+  }
+  .mw-11p {
+    min-width:11%;
+  }
+  .mw-12p {
+    min-width:12%;
+  }
+  .mw-13p {
+    min-width:13%;
+  }
+
 
 </style>
 
