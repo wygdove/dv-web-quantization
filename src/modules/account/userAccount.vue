@@ -149,12 +149,4 @@
 </script>
 
 
-<style>
-  .mt-20 {
-    margin-top: 20px;
-  }
-  .h-300 {
-    height: 300px;
-    overflow: scroll;
-  }
-</style>
+

@@ -3,10 +3,10 @@
     <el-collapse @change="handleChange" v-model="activeName">
       <el-collapse-item  v-for="(item,index) in collapseData" :name="item.code">
         <template slot="title">
-          <div class="ml-10 mw-6p  coll-title">{{item.name}}</div>
-          <div class="ml-10 mw-10p">收盘点位：<span>{{item.cp}}</span></div>
-          <div class="ml-10 mw-13p">PE-TTM 分位点：<span>{{item.pe_ttm.y_10.weightedAvg.latestValPosPer}}%</span></div>
-          <div class="ml-10 mw-11p">PB 分位点：<span>{{item.pb.y_10.weightedAvg.latestValPosPer}}%</span></div>
+          <div class="ml-10 miw-6p  coll-title">{{item.name}}</div>
+          <div class="ml-10 miw-10p">收盘点位：<span>{{item.cp}}</span></div>
+          <div class="ml-10 miw-13p">PE-TTM 分位点：<span>{{item.pe_ttm.y_10.weightedAvg.latestValPosPer}}%</span></div>
+          <div class="ml-10 miw-11p">PB 分位点：<span>{{item.pb.y_10.weightedAvg.latestValPosPer}}%</span></div>
         </template>
         <div></div>
       </el-collapse-item>
@@ -85,36 +85,5 @@
 </script>
 
 
-<style scoped>
-  .ml-5 {
-    margin-left:5px;
-  }
 
-  .ml-10 {
-    margin-left:10px;
-  }
-
-  .coll-title {
-    font-size:15px;
-    color:#409EFF;
-  }
-
-  .mw-6p {
-    min-width:6%;
-  }
-  .mw-10p {
-    min-width:10%;
-  }
-  .mw-11p {
-    min-width:11%;
-  }
-  .mw-12p {
-    min-width:12%;
-  }
-  .mw-13p {
-    min-width:13%;
-  }
-
-
-</style>
 

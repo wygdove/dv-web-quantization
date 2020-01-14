@@ -10,6 +10,8 @@ import {post,fetch,patch,put} from './api/http';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
+import './app.css'
+
 
 Vue.use(ElementUI);
 
