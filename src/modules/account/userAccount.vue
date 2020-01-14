@@ -15,7 +15,7 @@
                   <el-col :span="10"><span>累计收益：</span><span>123123</span></el-col>
                 </el-row>
               </el-col>
-              <el-col :span="16">图表</el-col>
+              <el-col :span="16"><div id="allMoneyChart" style="width:100%;height:250px;"></div></el-col>
             </el-row>
           </div>
         </el-card>
@@ -75,6 +75,8 @@
 </template>
 
 <script>
+  import EchartsUtil from '../../utils/EchartsUtil'
+
 
   export default {
     name: "userAccount",
@@ -99,6 +101,7 @@
       },
       initData:function() {
         let that=this;
+        that.getAllMoney();
         that.getUserAccount();
       },
       getUserAccount:function() {
@@ -109,6 +112,12 @@
           that.accountList=res.result;
         });
       },
+      getAllMoney:function() {
+        var xdata=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+        var ydata=[820,932,901,934,1290,1330,1320];
+        EchartsUtil.showLine("allMoneyChart",xdata,ydata);
+      },
+
 
 
       showDialogSaveAccount:function(data) {
