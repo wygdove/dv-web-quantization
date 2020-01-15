@@ -31,35 +31,38 @@
     },
     methods:{
       initFrame:function() {
-        var that=this;
+        let that=this;
         // this.initData();
       },
       initData:function() {
-        var that=this;
-        var stockCodes=[];
-        for(var indice in that.indices) {
-          stockCodes.push(indice);
-        }
-        // this.$post(this.$api.url.lixinger.astock.fundamental,{
-        that.$post("lixinger/a/indice/fundamental",{
-          // token:this.$api.url.lixinger.token,
-          token:"fca422e3-2818-47d1-b784-62e87d097349",
+        let that=this;
+
+      },
+      _getOveriewData() {
+        let that=this;
+        that.collapseData=[];
+        that.$post(that.$api.url.lixinger.aindice.fundamental,{
+          token:this.$api.url.lixinger.token,
           date:that.CommonUtil.getLastWorkDay(),
-          stockCodes:stockCodes,
+          stockCodes:that.indiceList,
           metrics:["pe_ttm.y_10.weightedAvg","pb.y_10.weightedAvg","cp","mc"]
         }).then(res => {
           if(res&&res.code===0&&res.data) {
             var data=res.data;
+            var tempdata={};
             for(var i in data) {
               data[i].code=data[i].stockCode;
               data[i].name=that.indices[data[i].stockCode];
               data[i].pe_ttm.y_10.weightedAvg.latestValPosPer=(data[i].pe_ttm.y_10.weightedAvg.latestValPos*100).toFixed(2);
               data[i].pb.y_10.weightedAvg.latestValPosPer=(data[i].pb.y_10.weightedAvg.latestValPos*100).toFixed(2);
-              that.collapseData.push(data[i]);
+              tempdata[data[i].code]=data[i];
+            }
+            for(var i in that.indiceList) {
+              that.collapseData.push(tempdata[that.indiceList[i]]);
             }
           }
         });
-      }
+      },
 
 
     }

@@ -116,7 +116,7 @@
       },
       getUserAccount:function() {
         let that=this;
-        that.$post("api/account/getUserAccount",{
+        that.$post(that.$api.url.account.getUserAccount,{
           "accountName":""
         }).then(res => {
           that.accountList=res.result;
@@ -144,7 +144,7 @@
       },
       saveUserAccount:function() {
         let that=this;
-        that.$post("api/account/saveUserAccount",
+        that.$post(that.$api.url.account.saveUserAccount,
           that.saveAccount
         ).then(res => {
           that.getUserAccount();
