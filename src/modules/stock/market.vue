@@ -3,7 +3,7 @@
     <el-collapse @change="handleChange" v-model="activeName">
       <el-collapse-item  v-for="(item,index) in collapseData" :name="item.code">
         <template slot="title">
-          <div class="ml-10 miw-6p  coll-title">{{item.name}}</div>
+          <div class="ml-10 miw-6p  coll-title-15">{{item.name}}</div>
           <div class="ml-10 miw-10p">收盘点位：<span>{{item.cp}}</span></div>
           <div class="ml-10 miw-13p">PE-TTM 分位点：<span>{{item.pe_ttm.y_10.weightedAvg.latestValPosPer}}%</span></div>
           <div class="ml-10 miw-11p">PB 分位点：<span>{{item.pb.y_10.weightedAvg.latestValPosPer}}%</span></div>

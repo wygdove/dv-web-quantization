@@ -6,13 +6,23 @@
         <el-card shadow="hover" class="box-card">
           <div class="text item">
             <el-row :gutter="20">
-              <el-col :span="8">
-                <el-row :gutter="20">
-                  <el-col><span>总资产：</span><span>123123</span></el-col>
+              <el-col :span="7">
+                <el-divider content-position="left">汇总</el-divider>
+                <el-row :gutter="20" class="pb-10">
+                  <el-col :span="6" class="coll-title-18">总资产</el-col>
+                  <el-col :span="6" class="fts-18">123456</el-col>
                 </el-row>
-                <el-row :gutter="20">
-                  <el-col :span="10"><span>累计投入：</span><span>123123</span></el-col>
-                  <el-col :span="10"><span>累计收益：</span><span>123123</span></el-col>
+                <el-row :gutter="20" class="pb-10">
+                  <el-col :span="6" class="coll-title-15">累计收益</el-col>
+                  <el-col :span="6" class="fts-15">123123</el-col>
+                  <el-col :span="6" class="coll-title-15">累计投入</el-col>
+                  <el-col :span="6" class="fts-15">123123</el-col>
+                </el-row>
+                <el-row :gutter="20" class="pb-10">
+                  <el-col :span="6" class="coll-title-15">累计收益率</el-col>
+                  <el-col :span="6" class="fts-15">9.90%</el-col>
+                  <el-col :span="6" class="coll-title-15">年化收益率</el-col>
+                  <el-col :span="6" class="fts-15">61.64%</el-col>
                 </el-row>
               </el-col>
               <el-col :span="16"><div id="allMoneyChart" style="width:100%;height:250px;"></div></el-col>
@@ -26,7 +36,7 @@
       <el-col class="mt-20" :span="8" v-for="(item,index) in accountList" :key="index">
         <el-card shadow="hover" class="box-card h-300">
           <div slot="header" class="clearfix">
-            <span>{{item.accountName }}</span>
+            <span class="coll-title-16">{{item.accountName }}</span>
             <span style="float:right">
               <el-button size="mini" circle><i class="el-icon-delete"></i></el-button>
               <el-button size="mini" circle><i class="el-icon-edit"></i></el-button>
@@ -38,10 +48,10 @@
           </div>
         </el-card>
       </el-col>
-      <el-col class="mt-20" :span="8">
+      <el-col class="mt-20" :span="7">
         <el-card shadow="hover" class="box-card h-300">
           <div style="width:100%;height:260px;">
-            <i class="el-icon-plus" style="font-size:80px;margin:80px 150px;" @click="showDialogSaveAccount(null)"></i>
+            <i class="el-icon-plus" style="font-size:80px;margin:28% 38%;" @click="showDialogSaveAccount(null)"></i>
           </div>
         </el-card>
       </el-col>

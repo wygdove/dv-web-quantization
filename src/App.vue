@@ -1,6 +1,6 @@
 <template>
-  <div style="height:1000px;">
-    <el-container style="height:90%;border:1px solid #eee;">
+  <div style="height:900px;">
+    <el-container style="height:100%;border:1px solid #eee;">
       <el-aside width="200px">
         <div class="headLogo bg headHeight" @click="dealCollapse()">Quantization</div>
         <div style="margin-top:46px;">
