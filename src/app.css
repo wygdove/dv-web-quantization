@@ -1,12 +1,10 @@
+.col-blue{color:#409EFF;}
+.col-green{color:#67C23A;}
+.col-yellow{color:#E6A23C;}
+.col-red{color:#F56C6C;}
+.col-grey{color:#909399;}
 
 
-
-
-.coll-title-12 {color:#409EFF;font-size:12px;}
-.coll-title-15 {color:#409EFF;font-size:15px;}
-.coll-title-16 {color:#409EFF;font-size:16px;}
-.coll-title-17 {color:#409EFF;font-size:17px;}
-.coll-title-18 {color:#409EFF;font-size:18px;}
 
 .fts-12 {font-size:12px;}
 .fts-15 {font-size:15px;}
@@ -20,12 +18,17 @@
 
 .ml-5 {margin-left:5px;}
 .ml-10 {margin-left:10px;}
+.ml-15 {margin-left:15px;}
+.ml-20 {margin-left:20px;}
 
 
 
 .pt-10 {padding-top:10px;}
 
+.pb-5 {padding-bottom:5px;}
 .pb-10 {padding-bottom:10px;}
+.pb-15 {padding-bottom:15px;}
+.pb-20 {padding-bottom:20px;}
 
 .pl-10 {padding-left:10px;}
 
@@ -33,8 +36,11 @@
 
 
 
-.w-60p {width:60%;}
+.w-10p {width:10%;}
 .w-40p {width:40%;}
+.w-60p {width:60%;}
+.w-80p {width:80%;}
+.w-90p {width:90%;}
 
 .miw-6p {min-width:6%;}
 .miw-10p {min-width:10%;}
@@ -48,6 +54,17 @@
 .h-300 {height:300px;}
 
 .mah-300 {max-height:300px;}
+
+
+
+
+
+
+.coll-title-12 {color:#409EFF;font-size:12px;}
+.coll-title-15 {color:#409EFF;font-size:15px;}
+.coll-title-16 {color:#409EFF;font-size:16px;}
+.coll-title-17 {color:#409EFF;font-size:17px;}
+.coll-title-18 {color:#409EFF;font-size:18px;}
 
 
 
