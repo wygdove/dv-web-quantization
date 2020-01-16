@@ -2,8 +2,8 @@
 const menu_config=[
   {
     path: '/',
-    redirect: '/index',
-    show: 'false'
+    show: 'false',
+    redirect: '/index'
   },
   {
     title: '主页',
@@ -22,6 +22,13 @@ const menu_config=[
         name: 'userAccount',
         path: '/account/userAccount',
         component: () => import('../modules/account/userAccount')
+      },
+      {
+        title: '账本明细',
+        show: 'false',
+        name: 'accountDetail',
+        path: '/account/userAccount/accountDetail',
+        component: () => import('../modules/account/accountDetail')
       },
       {
         title: '日账单',

@@ -7,7 +7,13 @@ Vue.use(VueRouter);
 
 
 
-const routes = menu_config;
+const routes=[
+  {
+    path: '/',
+    component: () => import('../modules/index/layout'),
+    children: menu_config
+  }
+]
 
 const router = new VueRouter({
   mode: 'history',

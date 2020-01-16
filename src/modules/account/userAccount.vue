@@ -40,7 +40,7 @@
             <span style="float:right">
               <el-button size="mini" circle @click="deleteUserAccount(item.accountCode)"><i class="el-icon-delete"></i></el-button>
               <el-button size="mini" circle @click="showDialogSaveAccount(item)"><i class="el-icon-edit"></i></el-button>
-              <el-button size="mini" circle><i class="el-icon-arrow-right"></i></el-button>
+              <el-button size="mini" circle @click="toAccountDetail(item.accountCode)"><i class="el-icon-arrow-right"></i></el-button>
             </span>
           </div>
           <div class="text item">
@@ -81,6 +81,7 @@
       </div>
     </el-dialog>
 
+    <!--<router-view></router-view>-->
   </div>
 </template>
 
@@ -153,7 +154,7 @@
           that.isShowDialogSaveAccount=false;
         });
       },
-      deleteUserAccount:function(data) {
+      deleteUserAccount:function(accountCode) {
         let that=this;
         this.$confirm('确认要删除此账本？','提示',{
           type:'warning',
@@ -161,16 +162,20 @@
           cancelButtonText:'取消'
         }).then(() => {
           that.$post(that.$api.url.account.deleteUserAccount,
-            {"accountCode":data}
+            {"accountCode":accountCode}
           ).then(res => {
             that.getUserAccount();
             that.CommonUtil.showSuccess('账本已删除！')
           });
         }).catch(() => {
         });
+      },
 
+      toAccountDetail(accountCode) {
+        let that=this;
+        var params={"accountCode":accountCode}
+        that.$router.push({path:'/account/userAccount/accountDetail',query:params});
       }
-
 
 
     }
