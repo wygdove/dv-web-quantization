@@ -18,6 +18,12 @@ const menu_config=[
     component: () => import('../modules/index/index'),
     children: [
       {
+        title: '用户账本',
+        name: 'userAccount',
+        path: '/account/userAccount',
+        component: () => import('../modules/account/userAccount')
+      },
+      {
         title: '日账单',
         name: 'dailyaccount',
         path: '/account/dailyaccount',
@@ -28,12 +34,6 @@ const menu_config=[
         name: 'classConfig',
         path: '/account/accountConfig/classConfig',
         component: () => import('../modules/account/accountConfig/classConfig')
-      },
-      {
-        title: '用户账本',
-        name: 'userAccount',
-        path: '/account/userAccount',
-        component: () => import('../modules/account/userAccount')
       }
     ]
   },

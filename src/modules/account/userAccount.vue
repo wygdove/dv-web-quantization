@@ -38,9 +38,9 @@
           <div slot="header" class="clearfix">
             <span class="coll-title-16">{{item.accountName }}</span>
             <span style="float:right">
-              <el-button size="mini" circle><i class="el-icon-delete"></i></el-button>
-              <el-button size="mini" circle><i class="el-icon-edit"></i></el-button>
-              <el-button size="mini" circle><i class="el-icon-tickets"></i></el-button>
+              <el-button size="mini" circle @click="deleteUserAccount(item.accountCode)"><i class="el-icon-delete"></i></el-button>
+              <el-button size="mini" circle @click="showDialogSaveAccount(item)"><i class="el-icon-edit"></i></el-button>
+              <el-button size="mini" circle><i class="el-icon-arrow-right"></i></el-button>
             </span>
           </div>
           <div class="text item">
@@ -50,8 +50,8 @@
       </el-col>
       <el-col class="mt-20" :span="7">
         <el-card shadow="hover" class="box-card h-300">
-          <div style="width:100%;height:260px;">
-            <i class="el-icon-plus" style="font-size:80px;margin:28% 38%;" @click="showDialogSaveAccount(null)"></i>
+          <div style="width:100%;height:260px;" @click="showDialogSaveAccount(null)">
+            <i class="el-icon-plus" style="font-size:80px;margin:28% 38%;"></i>
           </div>
         </el-card>
       </el-col>
@@ -140,6 +140,8 @@
             isIntoSummary:"",
             currency:""
           };
+        }else {
+          that.saveAccount=data;
         }
       },
       saveUserAccount:function() {
@@ -150,6 +152,23 @@
           that.getUserAccount();
           that.isShowDialogSaveAccount=false;
         });
+      },
+      deleteUserAccount:function(data) {
+        let that=this;
+        this.$confirm('确认要删除此账本？','提示',{
+          type:'warning',
+          confirmButtonText:'确定',
+          cancelButtonText:'取消'
+        }).then(() => {
+          that.$post(that.$api.url.account.deleteUserAccount,
+            {"accountCode":data}
+          ).then(res => {
+            that.getUserAccount();
+            that.CommonUtil.showSuccess('账本已删除！')
+          });
+        }).catch(() => {
+        });
+
       }
 
 

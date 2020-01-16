@@ -7,6 +7,7 @@ export default {
     account:{
       getUserAccount:'api/account/getUserAccount',
       saveUserAccount:'api/account/saveUserAccount',
+      deleteUserAccount:'api/account/deleteUserAccount',
 
     },
 

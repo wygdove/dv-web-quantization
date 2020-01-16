@@ -29,6 +29,7 @@ axios.interceptors.response.use(function(response) {
         msg=res.message;
       }
       Message({type:'error',message:msg,showClose:true,duration:5000});
+      return;
     }
   }
   return response;
