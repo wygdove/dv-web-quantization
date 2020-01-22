@@ -29,18 +29,6 @@ const menu_config=[
         name: 'accountDetail',
         path: '/account/userAccount/accountDetail',
         component: () => import('../modules/account/accountDetail')
-      },
-      {
-        title: '日账单',
-        name: 'dailyaccount',
-        path: '/account/dailyaccount',
-        component: () => import('../modules/account/dailyaccount')
-      },
-      {
-        title: '账本配置',
-        name: 'classConfig',
-        path: '/account/accountConfig/classConfig',
-        component: () => import('../modules/account/accountConfig/classConfig')
       }
     ]
   },
