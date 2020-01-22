@@ -93,6 +93,14 @@
     name: "userAccount",
     data () {
       return {
+        itemConfig:{
+          "moduleFlag":"UserAccount",
+          "codeKey":"accountCode",
+          "codePrefix":"UA",
+          "codeLength":6
+        },
+        itemData:{},
+
         accountList:[],
         isShowDialogSaveAccount:false,
         saveAccount:{
@@ -117,8 +125,9 @@
       },
       getUserAccount:function() {
         let that=this;
-        that.$post(that.$api.url.account.getUserAccount,{
-          "accountName":""
+        that.$post(that.$api.url.common.getItem,{
+          itemConfig:that.itemConfig,
+          itemData:{"accountName":""}
         }).then(res => {
           that.accountList=res.result;
         });
@@ -147,9 +156,10 @@
       },
       saveUserAccount:function() {
         let that=this;
-        that.$post(that.$api.url.account.saveUserAccount,
-          that.saveAccount
-        ).then(res => {
+        that.$post(that.$api.url.common.saveItem,{
+          itemConfig:that.itemConfig,
+          itemData:that.saveAccount
+        }).then(res => {
           that.getUserAccount();
           that.isShowDialogSaveAccount=false;
         });
@@ -161,9 +171,10 @@
           confirmButtonText:'确定',
           cancelButtonText:'取消'
         }).then(() => {
-          that.$post(that.$api.url.account.deleteUserAccount,
-            {"accountCode":accountCode}
-          ).then(res => {
+          that.$post(that.$api.url.common.deleteItem,{
+            itemConfig:that.itemConfig,
+            itemData:{"accountCode":accountCode}
+          }).then(res => {
             that.getUserAccount();
             that.CommonUtil.showSuccess('账本已删除！')
           });
