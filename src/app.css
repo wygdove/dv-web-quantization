@@ -11,6 +11,7 @@
 .fts-16 {font-size:16px;}
 .fts-17 {font-size:17px;}
 .fts-18 {font-size:18px;}
+.fts-20 {font-size:20px;}
 
 
 
@@ -23,6 +24,11 @@
 
 
 
+.padding-2 {padding:2px 2px;}
+.padding-4 {padding:4px 4px;}
+.padding-5 {padding:5px 5px;}
+.padding-6 {padding:6px 6px;}
+
 .pt-10 {padding-top:10px;}
 
 .pb-5 {padding-bottom:5px;}
@@ -30,9 +36,19 @@
 .pb-15 {padding-bottom:15px;}
 .pb-20 {padding-bottom:20px;}
 
+.pl-2 {padding-left:2px;}
 .pl-10 {padding-left:10px;}
 
+.pr-2 {padding-left:2px;}
 .pr-10 {padding-left:10px;}
+
+
+
+.border-0 {border:0;}
+
+
+
+.fr {float:right;}
 
 
 
@@ -52,9 +68,15 @@
 
 
 .h-300 {height:300px;}
+.h-400 {height:400px;}
 .h-500 {height:500px;}
 
 .mah-300 {max-height:300px;}
+.mah-400 {max-height:400px;}
+
+
+
+.oys {overflow-y:scroll;}
 
 
 
