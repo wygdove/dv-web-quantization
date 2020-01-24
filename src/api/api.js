@@ -7,13 +7,6 @@ export default {
       deleteItem:'api/common/deleteItem'
     },
 
-    // 个人账户
-    account:{
-      getUserAccount:'api/account/getUserAccount',
-      saveUserAccount:'api/account/saveUserAccount',
-      deleteUserAccount:'api/account/deleteUserAccount'
-    },
-
 
 
 
