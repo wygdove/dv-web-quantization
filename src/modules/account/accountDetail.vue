@@ -57,16 +57,15 @@
                 </el-row>
               </el-tab-pane>
               <el-tab-pane>
-                <span slot="label"><i class="el-icon-s-data"></i>收益记录</span>
+                <span slot="label"><i class="el-icon-s-data"></i>总资产记录</span>
                 <el-row :gutter="20">
                   <el-col :span="12">
                     <el-table :data="investObject.data" show-summary :summary-method="getinvestSummaries" border>
                       <el-table-column label="日期" prop="date" sortable></el-table-column>
-                      <el-table-column label="标的代码" prop="objectCode" sortable></el-table-column>
-                      <el-table-column label="标的名称" prop="objectName" sortable
-                                       :filters="investObject.filterObject" :filter-method="filterHandler" filter-placement="bottom-end"></el-table-column>
-                      <el-table-column label="买入/卖出" prop="buy" sortable></el-table-column>
-                      <el-table-column label="标的类别名称" prop="className" sortable></el-table-column>
+                      <el-table-column label="投入总额" prop="objectCode" sortable></el-table-column>
+                      <el-table-column label="总资产记录" prop="objectName" sortable></el-table-column>
+                      <el-table-column label="盈利" prop="buy" sortable></el-table-column>
+                      <el-table-column label="收益率" prop="className" sortable></el-table-column>
                     </el-table>
                   </el-col>
                 </el-row>
@@ -78,10 +77,36 @@
       <el-dialog title="账本入出" :visible.sync="inout.save.isShow">
         <el-form :model="inout.save.data">
           <el-form-item label-width="20%">
-              <el-radio-group v-model="inout.save.data.isOut" size="medium">
-                <el-radio-button :label="false" icon="el-icon-search">转入</el-radio-button>
-                <el-radio-button :label="true" icon="el-icon-search">转出</el-radio-button>
-              </el-radio-group>
+            <el-radio-group v-model="inout.save.data.isOut" size="medium">
+              <el-radio-button :label="false" icon="el-icon-search">转入</el-radio-button>
+              <el-radio-button :label="true" icon="el-icon-search">转出</el-radio-button>
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="日期" label-width="20%">
+            <el-date-picker v-model="inout.save.data.recordDate" type="datetime" placeholder="选择日期" clearable style="width:50%;"></el-date-picker>
+          </el-form-item>
+          <el-form-item label-width="20%" label="转出资金" v-if="inout.save.data.isOut" >
+            <el-input v-model="inout.save.data.recordInOut" placeholder="请输入转出资金" clearable style="width:50%;"></el-input>
+          </el-form-item>
+          <el-form-item label-width="20%" label="转入资金" v-else>
+            <el-input v-model="inout.save.data.recordInOut" placeholder="请输入转入资金" clearable style="width:50%;"></el-input>
+          </el-form-item>
+          <el-form-item label="备注" label-width="20%">
+            <el-input type="textarea" v-model="inout.save.data.remark" placeholder="请输入备注" clearable></el-input>
+          </el-form-item>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="inout.save.isShow=false">取 消</el-button>
+          <el-button type="primary" @click="saveAssetRecord">确 定</el-button>
+        </div>
+      </el-dialog>
+      <el-dialog title="总资产记录" :visible.sync="inout.save.isShow">
+        <el-form :model="inout.save.data">
+          <el-form-item label-width="20%">
+            <el-radio-group v-model="inout.save.data.isOut" size="medium">
+              <el-radio-button :label="false" icon="el-icon-search">转入</el-radio-button>
+              <el-radio-button :label="true" icon="el-icon-search">转出</el-radio-button>
+            </el-radio-group>
           </el-form-item>
           <el-form-item label="日期" label-width="20%">
             <el-date-picker v-model="inout.save.data.recordDate" type="datetime" placeholder="选择日期" clearable style="width:50%;"></el-date-picker>
