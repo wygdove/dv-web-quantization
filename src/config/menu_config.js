@@ -9,7 +9,15 @@ const menu_config=[
     title: '主页',
     name: 'index',
     path: '/index',
-    component: () => import('../modules/index/index')
+    component: () => import('../modules/index/index'),
+    children: [
+      {
+        title: '测试子页',
+        name: 'testSubPage',
+        path: '/test/testSubPage',
+        component: () => import('../modules/test/testSubPage')
+      },
+    ]
   },
   {
     title: '账本',
