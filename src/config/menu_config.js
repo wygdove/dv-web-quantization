@@ -114,6 +114,26 @@ const menu_config=[
       }
     ]
   },
+  {
+    title: '设置',
+    name: 'setting',
+    path: '/setting',
+    component: () => import('../modules/index/index'),
+    children: [
+      {
+        title: '投资类别',
+        name: 'investClass',
+        path: '/setting/investClass',
+        component: () => import('../modules/setting/investClass')
+      },
+      {
+        title: '投资标的',
+        name: 'investment',
+        path: '/setting/investment',
+        component: () => import('../modules/setting/investment')
+      },
+    ]
+  },
 
 
 

@@ -3,7 +3,7 @@
     <div class="pl-10">
       <el-form :model="query" inline>
         <el-form-item label="编码">
-          <el-input v-model="query.code" clearable></el-input>
+          <el-input v-model="query.investClassCode" clearable></el-input>
         </el-form-item>
         <el-form-item size="small">
           <el-button type="primary" @click="getTableData"><i class="el-icon-search"></i></el-button>
@@ -14,9 +14,9 @@
       <el-col :span="10">
         <el-button class="fr padding-4" @click="showSaveItem(null)"><i class="el-icon-plus fts-16"></i></el-button>
         <el-table :data="data" border height="400">
-          <el-table-column label="ID" prop="idCode" resizable sortable min-width="120"></el-table-column>
-          <el-table-column label="编码" prop="code" resizable sortable min-width="150"></el-table-column>
-          <el-table-column label="名称" prop="name" resizable sortable min-width="150"></el-table-column>
+          <el-table-column label="ID" prop="investClassIdCode" resizable sortable min-width="120"></el-table-column>
+          <el-table-column label="编码" prop="investClassCode" resizable sortable min-width="150"></el-table-column>
+          <el-table-column label="名称" prop="investClassName" resizable sortable min-width="150"></el-table-column>
           <el-table-column label="操作" width="100">
             <template slot-scope="scope">
               <el-button @click.native.prevent="showSaveItem(scope.row)" icon="el-icon-edit" size="small" style="padding: 5px 8px;"></el-button>
@@ -26,13 +26,13 @@
         </el-table>
       </el-col>
     </el-row>
-    <el-dialog title="标题" :visible.sync="save.isShow">
+    <el-dialog title="投资类别" :visible.sync="save.isShow">
       <el-form :model="save.data">
         <el-form-item label-width="20%" label="编码">
-          <el-input v-model="save.data.code" placeholder="请输入" clearable style="width:50%;"></el-input>
+          <el-input v-model="save.data.investClassCode" placeholder="请输入" clearable style="width:50%;"></el-input>
         </el-form-item>
         <el-form-item label-width="20%" label="名称">
-          <el-input v-model="save.data.name" placeholder="请输入" clearable style="width:50%;"></el-input>
+          <el-input v-model="save.data.investClassName" placeholder="请输入" clearable style="width:50%;"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -47,26 +47,26 @@
 <script>
 
   export default {
-    name: "itemTest",
+    investClassName: "itemTest",
     data () {
       return {
         itemConfig:{
-          "moduleFlag":"ItemTest",
-          "codeKey":"idCode",
-          "codePrefix":"IT",
+          "moduleFlag":"InvestClass",
+          "codeKey":"investClassIdCode",
+          "codePrefix":"IC",
           "codeLength":6,
         },
         itemData:{
-          "code":"",
-          "name":"",
+          "investClassCode":"",
+          "investClassName":"",
         },
 
         save:{
           isShow:false,
-          data:{code:'',name:''}
+          data:{investClassCode:'',investClassName:''}
         },
 
-        query:{code:''},
+        query:{investClassCode:''},
         data:[]
       }
     },
@@ -80,7 +80,7 @@
         that.getTableData();
       },
       clearSaveData() {
-        this.save.data={code:'',name:''};
+        this.save.data={investClassCode:'',investClassName:''};
         this.save.isShow=false;
       },
 
@@ -97,9 +97,9 @@
       showSaveItem(rowdata) {
         let that=this;
         if(!that.CommonUtil.isNullObj(rowdata)) {
-          that.save.data.idCode=rowdata.idCode;
-          that.save.data.code=rowdata.code;
-          that.save.data.name=rowdata.name;
+          that.save.data.investClassIdCode=rowdata.investClassIdCode;
+          that.save.data.investClassCode=rowdata.investClassCode;
+          that.save.data.investClassName=rowdata.investClassName;
         }else {
           that.clearSaveData();
         }
@@ -108,11 +108,11 @@
       saveItem() {
         let that=this;
         var saveRecord={
-          code:that.save.data.code,
-          name:that.save.data.name
+          investClassCode:that.save.data.investClassCode,
+          investClassName:that.save.data.investClassName
         };
-        if(!that.CommonUtil.isNullStr(that.save.data.idCode)) {
-          saveRecord.idCode=that.save.data.idCode;
+        if(!that.CommonUtil.isNullStr(that.save.data.investClassIdCode)) {
+          saveRecord.investClassIdCode=that.save.data.investClassIdCode;
         }
         that.$post(that.$api.url.common.saveItem,{
           itemConfig:that.itemConfig,
@@ -124,13 +124,13 @@
       },
       deleteItem(rowdata) {
         let that=this;
-        if(that.CommonUtil.isNullStr(rowdata.idCode)) return;
+        if(that.CommonUtil.isNullStr(rowdata.investClassIdCode)) return;
         that.$confirm('确认要删除此记录？','提示',
           {type:'warning',confirmButtonText:'确定',cancelButtonText:'取消'}
         ).then(() => {
           that.$post(that.$api.url.common.deleteItem,{
             itemConfig:that.itemConfig,
-            itemData:{idCode:rowdata.idCode}
+            itemData:{investClassIdCode:rowdata.investClassIdCode}
           }).then(res => {
             that.getTableData();
           });

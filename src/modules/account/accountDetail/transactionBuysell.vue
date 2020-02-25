@@ -107,20 +107,7 @@
         data:[],
         filterObject:[],
 
-        investmentData:{
-          '510500':{
-            investmentCode:'510500',
-            investmentName:'500ETF',
-            investClassCode:'IndiceFund',
-            investClassName:'指数基金',
-          },
-          '128088':{
-            investmentCode:'128088',
-            investmentName:'深南转债',
-            investClassCode:'ConvertibleBond',
-            investClassName:'可转债',
-          },
-        },
+        investmentData:{},
 
       }
     },
@@ -133,6 +120,7 @@
         that.query["accountCode"]=that.accountCode;
         that.save.data.transactionDate=that.CommonUtil.getNow();
         that.getInvestData();
+        that.getInvestment();
       },
 
       getInvestData() {
@@ -258,6 +246,21 @@
           });
         });
       },
+
+
+      getInvestment() {
+        let that=this;
+        that.$post(that.$api.url.common.getItem,{
+          itemConfig:{"moduleFlag":"Investment","codeKey":"investmentIdCode"},
+          itemData:{}
+        }).then(res => {
+          that.investmentData={};
+          var ivdata=res.result;
+          for(var i in ivdata) {
+            that.investmentData[ivdata[i].investmentCode]=ivdata[i]
+          }
+        });
+      }
 
     }
   }
