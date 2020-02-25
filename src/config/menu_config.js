@@ -17,6 +17,12 @@ const menu_config=[
         path: '/test/testSubPage',
         component: () => import('../modules/test/testSubPage')
       },
+      {
+        title: 'ItemTest',
+        name: 'itemTest',
+        path: '/test/itemTest',
+        component: () => import('../modules/test/itemTest')
+      },
     ]
   },
   {
