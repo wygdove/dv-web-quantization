@@ -35,7 +35,7 @@
           <el-input v-model="save.data.recordHolding" placeholder="请输入总资产" clearable style="width:50%;"></el-input>
         </el-form-item>
         <el-form-item label="备注" label-width="20%">
-          <el-input type="textarea" v-model="save.data.remark" placeholder="请输入备注" clearable></el-input>
+          <el-input type="textarea" v-model="save.data.remark" placeholder="请输入备注" clearable style="width:80%;"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -118,7 +118,11 @@
       saveAssetRecord() {
         let that=this;
         that.save.data.recordHolding=Number(that.save.data.recordHolding);
-        if(isNaN(that.save.data.recordHolding)) that.save.data.recordHolding=0;
+        if(isNaN(that.save.data.recordHolding)) {
+          console.log(that.save.data);
+          that.save.data.recordHolding=0;
+          return;
+        }
         var saveRecord={
           recordDate:that.save.data.recordDate,
           recordInOut:0,

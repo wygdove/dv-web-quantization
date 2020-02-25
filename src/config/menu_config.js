@@ -41,9 +41,23 @@ const menu_config=[
     ]
   },
   {
+    title: '投资看板',
+    name: 'investOverview',
+    path: '/investOverview',
+    component: () => import('../modules/index/index'),
+    children: []
+  },
+  {
     title: '指数基金',
-    name: 'indice',
-    path: '/indice',
+    name: 'indiceFund',
+    path: '/indiceFund',
+    component: () => import('../modules/index/index'),
+    children: []
+  },
+  {
+    title: '可转债',
+    name: 'convertibleBond',
+    path: '/convertibleBond',
     component: () => import('../modules/index/index'),
     children: []
   },
@@ -66,6 +80,13 @@ const menu_config=[
         component: () => import('../modules/stock/whiteHorse')
       }
     ]
+  },
+  {
+    title: '股票基金',
+    name: 'stockFund',
+    path: '/stockFund',
+    component: () => import('../modules/index/index'),
+    children: []
   },
   {
     title: '债券',

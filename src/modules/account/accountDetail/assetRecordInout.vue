@@ -44,7 +44,7 @@
           <el-input v-model="save.data.recordInOut" placeholder="请输入转入资金" clearable style="width:50%;"></el-input>
         </el-form-item>
         <el-form-item label="备注" label-width="20%">
-          <el-input type="textarea" v-model="save.data.remark" placeholder="请输入备注" clearable></el-input>
+          <el-input type="textarea" v-model="save.data.remark" placeholder="请输入备注" clearable style="width:80%;"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -146,7 +146,11 @@
       saveAssetRecord() {
         let that=this;
         that.save.data.recordInOut=Number(that.save.data.recordInOut);
-        if(isNaN(that.save.data.recordInOut)) that.save.data.recordInOut=0;
+        if(isNaN(that.save.data.recordInOut)) {
+          console.log(that.save.data);
+          that.save.data.recordInOut=0;
+          return;
+        }
         if(that.save.data.isOut&&that.save.data.recordInOut>0) {
           that.save.data.recordInOut=-that.save.data.recordInOut;
         }

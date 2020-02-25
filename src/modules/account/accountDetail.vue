@@ -9,7 +9,7 @@
 
     <!------ inout start ------>
     <el-card class="box-card mt-20">
-      <el-collapse value="0">
+      <el-collapse value="1">
         <el-collapse-item name="0">
           <template slot="title">账本入出</template>
           <div>
@@ -35,11 +35,15 @@
 
     <!------ invest start ------>
     <el-card class="box-card mt-20">
-      <el-collapse>
-        <el-collapse-item>
+      <el-collapse value="0">
+        <el-collapse-item name="0">
           <template slot="title">投资标的</template>
           <div>
             <el-tabs value="1" type="border-card">
+              <el-tab-pane>
+                <span slot="label"><i class="el-icon-notebook-2"></i>总览</span>
+                <TransactionOverview :accountCode="params.accountCode"></TransactionOverview>
+              </el-tab-pane>
               <el-tab-pane>
                 <span slot="label"><i class="el-icon-notebook-2"></i>投资流水</span>
                 <TransactionBuysell :accountCode="params.accountCode"></TransactionBuysell>
@@ -66,6 +70,7 @@
   import AssetRecordOverview from './accountDetail/AssetRecordOverview'
   import transactionBuysell from './accountDetail/transactionBuysell'
   import transactionEarn from './accountDetail/transactionEarn'
+  import TransactionOverview from './accountDetail/TransactionOverview'
   import investClass from './accountDetail/investClass'
 
 
@@ -77,6 +82,7 @@
       AssetRecordOverview:AssetRecordOverview,
       TransactionBuysell:transactionBuysell,
       TransactionEarn:transactionEarn,
+      TransactionOverview:TransactionOverview,
       InvestClass:investClass
     },
     data () {
