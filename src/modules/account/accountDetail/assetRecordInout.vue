@@ -14,9 +14,9 @@
       <el-col :span="10">
         <el-button class="fr padding-4" @click="showSaveAssetRecord(null)"><i class="el-icon-plus fts-16"></i></el-button>
         <el-table :data="data" show-summary :summary-method="getInoutRecordSummaries" border height="400">
-          <el-table-column label="日期" prop="recordDate" resizable sortable min-width="122"></el-table-column>
-          <el-table-column label="投入" prop="recordInOut" resizable sortable min-width="100"></el-table-column>
-          <el-table-column label="备注" prop="remark" resizable sortable min-width="100"></el-table-column>
+          <el-table-column label="日期" prop="recordDate" resizable sortable width="180"></el-table-column>
+          <el-table-column label="投入" prop="recordInOut" resizable sortable width="120"></el-table-column>
+          <el-table-column label="备注" prop="remark" resizable width="220"></el-table-column>
           <el-table-column label="操作" width="100">
             <template slot-scope="scope">
               <el-button @click.native.prevent="showSaveAssetRecord(scope.row)" icon="el-icon-edit" size="small" style="padding: 5px 8px;"></el-button>
@@ -96,13 +96,16 @@
         that.save.data.recordDate=that.CommonUtil.getNow();
         that.getInoutData();
       },
+
       getInoutData() {
         let that=this;
         that.$post(that.$api.url.common.getItem,{
           itemConfig:that.itemConfig,
           itemData:that.query
         }).then(res => {
-          that.data=res.result;
+          that.data=res.result.filter(function(one) {
+            return !that.CommonUtil.isNullObj(one.recordInOut)&&one.recordInOut!=0;
+          });
         });
       },
       getInoutRecordSummaries(param) {
@@ -123,22 +126,22 @@
         });
         return sums;
       },
-      showSaveAssetRecord(ardata) {
+
+      showSaveAssetRecord(rowdata) {
         let that=this;
-        if(!that.CommonUtil.isNullObj(ardata)) {
+        if(!that.CommonUtil.isNullObj(rowdata)) {
           that.save.data={
-            isOut:ardata.recordInOut<0,
-            recordCode:ardata.recordCode,
-            recordDate:ardata.recordDate,
-            recordInOut:ardata.recordInOut,
-            remark:ardata.remark
+            isOut:rowdata.recordInOut<0,
+            recordCode:rowdata.recordCode,
+            recordDate:rowdata.recordDate,
+            recordInOut:rowdata.recordInOut,
+            remark:rowdata.remark
           };
           if(that.save.data.recordInOut<0) that.save.data.recordInOut=-that.save.data.recordInOut;
         }else {
-          that.save.data={isOut:false,recordDate:new Date(),recordInOut:'',remark:''};
+          that.save.data={isOut:false,recordDate:that.CommonUtil.getNow(),recordInOut:'',remark:''};
         }
         that.save.isShow=true;
-        console.log(that.save.data);
       },
       saveAssetRecord() {
         let that=this;
@@ -148,7 +151,7 @@
           that.save.data.recordInOut=-that.save.data.recordInOut;
         }
         var saveRecord={
-          recordDate:that.CommonUtil.formatDate(that.save.data.recordDate),
+          recordDate:that.save.data.recordDate,
           recordInOut:that.save.data.recordInOut,
           recordHolding:0,
           remark:that.save.data.remark,
@@ -164,15 +167,15 @@
           that.save.isShow=false;
         });
       },
-      deleteAssetRecord(ardata) {
+      deleteAssetRecord(rowdata) {
         let that=this;
-        if(that.CommonUtil.isNullStr(ardata.recordCode)) return;
+        if(that.CommonUtil.isNullStr(rowdata.recordCode)) return;
         that.$confirm('确认要删除此记录？','提示',
           {type:'warning',confirmButtonText:'确定',cancelButtonText:'取消'}
         ).then(() => {
           that.$post(that.$api.url.common.deleteItem,{
             itemConfig:that.itemConfig,
-            itemData:{recordCode:ardata.recordCode}
+            itemData:{recordCode:rowdata.recordCode}
           }).then(res => {
             that.getInoutData();
           });

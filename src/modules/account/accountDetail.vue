@@ -13,7 +13,11 @@
         <el-collapse-item name="0">
           <template slot="title">账本入出</template>
           <div>
-            <el-tabs value="0" type="border-card">
+            <el-tabs value="1" type="border-card">
+              <el-tab-pane>
+                <span slot="label"><i class="el-icon-notebook-2"></i>总览</span>
+                <AssetRecordOverview :accountCode="params.accountCode"></AssetRecordOverview>
+              </el-tab-pane>
               <el-tab-pane>
                 <span slot="label"><i class="el-icon-notebook-2"></i>入账流水</span>
                 <AssetRecordInout :accountCode="params.accountCode"></AssetRecordInout>
@@ -59,6 +63,7 @@
 
   import assetRecordInout from './accountDetail/assetRecordInout'
   import assetRecordEarn from './accountDetail/assetRecordEarn'
+  import AssetRecordOverview from './accountDetail/AssetRecordOverview'
   import transactionBuysell from './accountDetail/transactionBuysell'
   import transactionEarn from './accountDetail/transactionEarn'
   import investClass from './accountDetail/investClass'
@@ -69,6 +74,7 @@
     components: {
       AssetRecordInout:assetRecordInout,
       AssetRecordEarn:assetRecordEarn,
+      AssetRecordOverview:AssetRecordOverview,
       TransactionBuysell:transactionBuysell,
       TransactionEarn:transactionEarn,
       InvestClass:investClass
