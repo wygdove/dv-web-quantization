@@ -71,7 +71,7 @@
           accountCode:"UA000031",
         },
 
-        query:{dateStart:'',dateEnd:''},
+        query:{"recordHolding":{"$ne":0},dateStart:'',dateEnd:''},
         save:{
           isShow:false,
           data:{recordDate:'',recordHolding:'',remark:''}
@@ -91,13 +91,12 @@
       },
       getEarnData() {
         let that=this;
+        that.query={"recordHolding":{"$ne":0}};
         that.$post(that.$api.url.common.getItem,{
           itemConfig:that.itemConfig,
           itemData:that.query
         }).then(res => {
-          that.data=res.result.filter(function(one) {
-            return !that.CommonUtil.isNullObj(one.recordHolding)&&one.recordHolding!=0;
-          });
+          that.data=res.result;
         });
       },
 

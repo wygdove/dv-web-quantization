@@ -78,7 +78,7 @@
           accountCode:"UA000031",
         },
 
-        query:{dateStart:'',dateEnd:''},
+        query:{"recordInOut":{"$ne":0},dateStart:'',dateEnd:''},
         save:{
           isShow:false,
           data:{isOut:false,recordDate:'',recordInOut:'',remark:''}
@@ -99,13 +99,12 @@
 
       getInoutData() {
         let that=this;
+        that.query={"recordInOut":{"$ne":0}};
         that.$post(that.$api.url.common.getItem,{
           itemConfig:that.itemConfig,
           itemData:that.query
         }).then(res => {
-          that.data=res.result.filter(function(one) {
-            return !that.CommonUtil.isNullObj(one.recordInOut)&&one.recordInOut!=0;
-          });
+          that.data=res.result;
         });
       },
       getInoutRecordSummaries(param) {

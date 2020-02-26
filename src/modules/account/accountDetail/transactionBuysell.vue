@@ -28,7 +28,7 @@
         </el-table>
       </el-col>
     </el-row>
-    <el-dialog title="账本入出" :visible.sync="save.isShow">
+    <el-dialog title="投资记录" :visible.sync="save.isShow">
       <el-form :model="save.data">
         <el-form-item label-width="20%">
           <el-radio-group v-model="save.data.isBuy" size="medium">
@@ -77,6 +77,9 @@
 
   export default {
     name: "transactionBuysell",
+    props:{
+      accountCode:{type:String,default:''}
+    },
     data () {
       return {
         itemConfig:{
@@ -92,14 +95,14 @@
           investmentName:'',
           investClassCode:'',
           investClassName:'',
-          investmentBuysell:"0",
-          investmentHolding:"0",
-          investmentEarnHistory:"0",
+          investmentBuysell:0,
+          investmentEarnHistory:0,
+          investmentHolding:0,
           remark:"",
           accountCode:"UA000031",
         },
 
-        query:{dateStart:'',dateEnd:''},
+        query:{"investmentBuysell":{"$ne":0},dateStart:'',dateEnd:''},
         save:{
           isShow:false,
           data:{isBuy:true,transactionDate:'',investmentCode:'',investmentBuysell:'',investmentEarnHistory:'',remark:''}
@@ -125,13 +128,12 @@
 
       getInvestData() {
         let that=this;
+        that.query={"investmentBuysell":{"$ne":0}};
         that.$post(that.$api.url.common.getItem,{
           itemConfig:that.itemConfig,
           itemData:that.query
         }).then(res => {
-          that.data=res.result.filter(function(one) {
-            return !that.CommonUtil.isNullObj(one.investmentBuysell)&&one.investmentBuysell!=0;
-          });
+          that.data=res.result;
           that.getInvestFilterData();
         });
       },
@@ -174,7 +176,7 @@
         let that=this;
         if(!that.CommonUtil.isNullObj(rowdata)) {
           that.save.data={
-            isBuy:rowdata.recordInOut<0,
+            isBuy:rowdata.investmentBuysell<0,
             transactionCode:rowdata.transactionCode,
             transactionDate:rowdata.transactionDate,
             investmentBuysell:rowdata.investmentBuysell,
@@ -209,7 +211,6 @@
         that.save.data.transactionDate=that.save.data.transactionDate.replace(/T/g,' ').replace(/.000Z/g,'');
         var saveRecord={
           transactionDate:that.save.data.transactionDate,
-          recordInOut:that.save.data.recordInOut,
           investmentCode:that.save.data.investmentCode,
           investmentName:investment.investmentName,
           investClassCode:investment.investClassCode,
