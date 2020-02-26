@@ -206,6 +206,7 @@
         }
         that.save.data.investmentEarnHistory=Number(that.save.data.investmentEarnHistory);
         if(isNaN(that.save.data.investmentEarnHistory)) that.save.data.investmentEarnHistory=0;
+        that.save.data.transactionDate=that.save.data.transactionDate.replace(/T/g,' ').replace(/.000Z/g,'');
         var saveRecord={
           transactionDate:that.save.data.transactionDate,
           recordInOut:that.save.data.recordInOut,

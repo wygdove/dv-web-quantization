@@ -118,7 +118,7 @@
             if(!values.every(value => isNaN(value))) {
               sums[index]=values.reduce((prev,curr) => {
                 return !isNaN(Number(curr))?prev+curr:prev;
-              },0);
+              },0).toFixed(2);
             }
           }else {
             sums[index]='';
@@ -154,6 +154,7 @@
         if(that.save.data.isOut&&that.save.data.recordInOut>0) {
           that.save.data.recordInOut=-that.save.data.recordInOut;
         }
+        that.save.data.recordDate=that.save.data.recordDate.replace(/T/g,' ').replace(/.000Z/g,'');
         var saveRecord={
           recordDate:that.save.data.recordDate,
           recordInOut:that.save.data.recordInOut,

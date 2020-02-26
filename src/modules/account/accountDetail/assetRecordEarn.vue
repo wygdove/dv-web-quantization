@@ -123,6 +123,7 @@
           that.save.data.recordHolding=0;
           return;
         }
+        that.save.data.recordDate=that.save.data.recordDate.replace(/T/g,' ').replace(/.000Z/g,'');
         var saveRecord={
           recordDate:that.save.data.recordDate,
           recordInOut:0,
