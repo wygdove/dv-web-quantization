@@ -208,7 +208,13 @@
         }
         that.save.data.investmentEarnHistory=Number(that.save.data.investmentEarnHistory);
         if(isNaN(that.save.data.investmentEarnHistory)) that.save.data.investmentEarnHistory=0;
-        that.save.data.transactionDate=that.save.data.transactionDate.replace(/T/g,' ').replace(/.000Z/g,'');
+        if(typeof(that.save.data.transactionDate)==='string') {
+          that.save.data.transactionDate=that.save.data.transactionDate.replace(/T/g,' ').replace(/.000Z/g,'');
+        }else if(typeof(that.save.data.transactionDate)==='object'&&(that.save.data.transactionDate instanceof Date)) {
+          that.save.data.transactionDate=that.CommonUtil.formatDate(that.save.data.transactionDate);
+        }else {
+          return;
+        }
         var saveRecord={
           transactionDate:that.save.data.transactionDate,
           investmentCode:that.save.data.investmentCode,

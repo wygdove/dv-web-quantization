@@ -81,7 +81,7 @@ export default {
     if(hour.toString().length==1)hour="0"+hour;
     if(minute.toString().length==1)minute="0"+minute;
     if(second.toString().length==1)second="0"+second;
-    return year+"/"+month+"/"+day+" "+hour+":"+minute+":"+second;
+    return year+"-"+month+"-"+day+" "+hour+":"+minute+":"+second;
   },
 
   formatDate:function(date) {
@@ -96,7 +96,7 @@ export default {
     if(hour.toString().length==1)hour="0"+hour;
     if(minute.toString().length==1)minute="0"+minute;
     if(second.toString().length==1)second="0"+second;
-    return year+"/"+month+"/"+day+" "+hour+":"+minute+":"+second;
+    return year+"-"+month+"-"+day+" "+hour+":"+minute+":"+second;
   },
 
 

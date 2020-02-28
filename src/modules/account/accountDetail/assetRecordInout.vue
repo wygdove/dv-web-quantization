@@ -153,7 +153,13 @@
         if(that.save.data.isOut&&that.save.data.recordInOut>0) {
           that.save.data.recordInOut=-that.save.data.recordInOut;
         }
-        that.save.data.recordDate=that.save.data.recordDate.replace(/T/g,' ').replace(/.000Z/g,'');
+        if(typeof(that.save.data.recordDate)==='string') {
+          that.save.data.recordDate=that.save.data.recordDate.replace(/T/g,' ').replace(/.000Z/g,'');
+        }else if(typeof(that.save.data.recordDate)==='object'&&(that.save.data.recordDate instanceof Date)) {
+          that.save.data.recordDate=that.CommonUtil.formatDate(that.save.data.recordDate);
+        }else {
+          return;
+        }
         var saveRecord={
           recordDate:that.save.data.recordDate,
           recordInOut:that.save.data.recordInOut,

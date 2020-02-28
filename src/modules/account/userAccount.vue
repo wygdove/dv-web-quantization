@@ -127,7 +127,7 @@
         let that=this;
         that.$post(that.$api.url.common.getItem,{
           itemConfig:that.itemConfig,
-          itemData:{"accountName":""}
+          itemData:{}
         }).then(res => {
           that.accountList=res.result;
         });

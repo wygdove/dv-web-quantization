@@ -122,7 +122,13 @@
           that.save.data.recordHolding=0;
           return;
         }
-        that.save.data.recordDate=that.save.data.recordDate.replace(/T/g,' ').replace(/.000Z/g,'');
+        if(typeof(that.save.data.recordDate)==='string') {
+          that.save.data.recordDate=that.save.data.recordDate.replace(/T/g,' ').replace(/.000Z/g,'');
+        }else if(typeof(that.save.data.recordDate)==='object'&&(that.save.data.recordDate instanceof Date)) {
+          that.save.data.recordDate=that.CommonUtil.formatDate(that.save.data.recordDate);
+        }else {
+          return;
+        }
         var saveRecord={
           recordDate:that.save.data.recordDate,
           recordInOut:0,
