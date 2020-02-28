@@ -6,7 +6,7 @@
           <el-date-picker v-model="query.dateStart" type="daterange" range-separator="-" unlink-panels start-placeholder="开始日期" end-placeholder="结束日期"></el-date-picker>
         </el-form-item>
         <el-form-item size="small">
-          <el-button type="primary"><i class="el-icon-search"></i></el-button>
+          <el-button type="primary" @click="getInvestData"><i class="el-icon-search"></i></el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -87,6 +87,8 @@
           "codeKey":"transactionCode",
           "codePrefix":"TR",
           "codeLength":12,
+          "sortField":"transactionDate",
+          "sortType":"desc",
         },
         itemData:{
           transactionCode:"TR000000000001",
@@ -128,6 +130,7 @@
 
       getInvestData() {
         let that=this;
+        that.data=[];
         that.query={"investmentBuysell":{"$ne":0}};
         that.$post(that.$api.url.common.getItem,{
           itemConfig:that.itemConfig,

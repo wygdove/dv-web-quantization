@@ -6,17 +6,17 @@
           <el-date-picker v-model="query.dateStart" type="daterange" range-separator="-" unlink-panels start-placeholder="开始日期" end-placeholder="结束日期"></el-date-picker>
         </el-form-item>
         <el-form-item size="small">
-          <el-button type="primary"><i class="el-icon-search"></i></el-button>
+          <el-button type="primary" @click="getEarnData"><i class="el-icon-search"></i></el-button>
         </el-form-item>
       </el-form>
     </div>
     <el-row :gutter="20">
-      <el-col :span="10">
+      <el-col :span="20">
         <el-button class="fr padding-4" @click="showSaveAssetRecord(null)"><i class="el-icon-plus fts-16"></i></el-button>
         <el-table :data="data" border height="400">
-          <el-table-column label="日期" prop="recordDate" resizable sortable width="180"></el-table-column>
-          <el-table-column label="总资产" prop="recordHolding" resizable sortable width="120"></el-table-column>
-          <el-table-column label="备注" prop="remark" resizable width="220"></el-table-column>
+          <el-table-column label="日期" prop="recordDate" resizable sortable width="200"></el-table-column>
+          <el-table-column label="总资产" prop="recordHolding" resizable sortable width="150"></el-table-column>
+          <el-table-column label="备注" prop="remark" resizable min-width="220"></el-table-column>
           <el-table-column label="操作" width="100">
             <template slot-scope="scope">
               <el-button @click.native.prevent="showSaveAssetRecord(scope.row)" icon="el-icon-edit" size="small" style="padding:5px 8px;"></el-button>
@@ -62,6 +62,8 @@
           "codeKey":"recordCode",
           "codePrefix":"AR",
           "codeLength":12,
+          "sortField":"recordDate",
+          "sortType":"desc",
         },
         itemData:{
           recordCode:"AR000000000002",
@@ -91,6 +93,7 @@
       },
       getEarnData() {
         let that=this;
+        that.data=[];
         that.query={"recordHolding":{"$ne":0}};
         that.$post(that.$api.url.common.getItem,{
           itemConfig:that.itemConfig,
