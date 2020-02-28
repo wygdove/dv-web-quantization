@@ -23,6 +23,12 @@ const menu_config=[
         path: '/test/itemTest',
         component: () => import('../modules/test/itemTest')
       },
+      {
+        title: 'DbTest',
+        name: 'dbTest',
+        path: '/test/dbtest',
+        component: () => import('../modules/test/dbtest')
+      },
     ]
   },
   {
