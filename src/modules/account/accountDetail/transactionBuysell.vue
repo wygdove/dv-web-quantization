@@ -150,6 +150,7 @@
         }
       },
       getInvestSummaries(param) {
+        let that=this;
         var sums=[];
         param.columns.forEach((column,index) => {
           if(index===0) {
@@ -170,6 +171,9 @@
             }
           }else {
             sums[index]='';
+          }
+          if(!that.CommonUtil.isNullStr(sums[index])&&!isNaN(sums[index])) {
+            sums[index]=sums[index].toFixed(2);
           }
         });
         return sums;

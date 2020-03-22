@@ -205,6 +205,7 @@
       },
 
 
+      // 获取配置的所有投资标的
       getInvestHoldingment() {
         let that=this;
         that.$post(that.$api.url.common.getItem,{
@@ -218,6 +219,7 @@
           }
         });
       },
+      // 获取当前持有的投资标的编码
       getHoldingInvestHoldingment() {
         let that=this;
         that.$post(that.$api.url.transaction.getHoldingInvestment,{
