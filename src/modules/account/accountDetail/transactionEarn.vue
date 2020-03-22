@@ -17,7 +17,7 @@
           <el-table-column label="日期" prop="transactionDate" resizable sortable width="180"></el-table-column>
           <el-table-column label="标的" prop="investmentName" resizable sortable width="120"></el-table-column>
           <el-table-column label="持有" prop="investmentHolding" resizable sortable width="120"></el-table-column>
-          <el-table-column label="备注" prop="remark" resizable width="250"></el-table-column>
+          <el-table-column label="备注" prop="remark" resizable width="280"></el-table-column>
           <el-table-column label="操作" width="100">
             <template slot-scope="scope">
               <el-button @click.native.prevent="showSaveTransaction(scope.row)" icon="el-icon-edit" size="small" style="padding: 5px 8px;"></el-button>
@@ -52,7 +52,6 @@
         <el-button type="primary" @click="saveTransaction">确 定</el-button>
       </div>
     </el-dialog>
-
   </div>
 </template>
 
@@ -107,8 +106,8 @@
       initFrame:function() {
         let that=this;
         that.query["accountCode"]=that.accountCode;
-        // that.clearSaveData();
-        // that.getInvestHoldingData();
+        that.clearSaveData();
+        that.getInvestHoldingData();
         // that.getInvestHoldingment();
         // that.getHoldingInvestHoldingment();
       },
@@ -144,6 +143,7 @@
           that.save.data={
             transactionCode:rowdata.transactionCode,
             transactionDate:rowdata.transactionDate,
+            investmentCode:rowdata.investmentCode,
             investmentHolding:rowdata.investmentHolding,
             remark:rowdata.remark
           };
