@@ -124,8 +124,8 @@
         let that=this;
         that.query["accountCode"]=that.accountCode;
         that.save.data.transactionDate=that.CommonUtil.getNow();
-        that.getInvestData();
-        that.getInvestment();
+        // that.getInvestData();
+        // that.getInvestment();
       },
 
       getInvestData() {

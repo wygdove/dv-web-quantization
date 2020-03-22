@@ -96,7 +96,7 @@
         let that=this;
         that.query["accountCode"]=that.accountCode;
         that.save.data.recordDate=that.CommonUtil.getNow();
-        that.getInoutData();
+        // that.getInoutData();
       },
 
       getInoutData() {

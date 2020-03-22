@@ -9,6 +9,7 @@ axios.interceptors.request.use(
     config.headers['X-Requested-With']='XMLHttpRequest';
     // config.headers['Access-Control-Allow-Origin']='true';
     // config.headers['Accept']='application/json';
+    config.url=config.url+'?num='+new Date().getTime()+(Math.random()*1000).toFixed();
 		return config;
 	},
 	err => {

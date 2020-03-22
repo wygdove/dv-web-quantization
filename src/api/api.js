@@ -6,6 +6,9 @@ export default {
       saveItem:'api/common/saveItem',
       deleteItem:'api/common/deleteItem'
     },
+    transaction: {
+      getHoldingInvestment:'api/transaction/getHoldingInvestment',
+    },
 
 
 

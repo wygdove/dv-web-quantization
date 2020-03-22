@@ -56,7 +56,7 @@
       initFrame:function() {
         let that=this;
         that.query["accountCode"]=that.accountCode;
-        that.getEarnData();
+        // that.getEarnData();
       },
       getEarnData() {
         let that=this;

@@ -89,7 +89,7 @@
         let that=this;
         that.query["accountCode"]=that.accountCode;
         that.save.data.recordDate=that.CommonUtil.getNow();
-        that.getEarnData();
+        // that.getEarnData();
       },
       getEarnData() {
         let that=this;
