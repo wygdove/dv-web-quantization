@@ -88,7 +88,7 @@
         let that=this;
         that.$post(that.$api.url.common.getItem,{
           itemConfig:that.itemConfig,
-          itemData:that.query
+          itemData:{}
         }).then(res => {
           that.data=res.result;
         });
