@@ -1,5 +1,5 @@
-var path = require('path')
-var webpack = require('webpack')
+var path = require('path');
+var webpack = require('webpack');
 
 module.exports = {
   entry: './src/main.js',
@@ -108,6 +108,12 @@ module.exports = {
         target: 'https://open.lixinger.com/api/',
         changeOrigin: true,
         pathRewrite: { '^/lixinger': '' },
+        secure: false
+      },
+      '/jisilu': {
+        target: 'https://www.jisilu.cn/',
+        changeOrigin: true,
+        pathRewrite: { '^/jisilu': '' },
         secure: false
       },
     },

@@ -1,4 +1,4 @@
-const axios = require('axios')
+const axios = require('axios');
 import config from './config';
 import { Message } from 'element-ui';
 
@@ -9,7 +9,11 @@ axios.interceptors.request.use(
     config.headers['X-Requested-With']='XMLHttpRequest';
     // config.headers['Access-Control-Allow-Origin']='true';
     // config.headers['Accept']='application/json';
-    config.url=config.url+'?num='+new Date().getTime()+(Math.random()*1000).toFixed();
+    if(config.url.startsWith("/jisilu")) {
+      config.url = config.url + '?___jsl=LST___t=' + new Date().getTime();
+    }else {
+      config.url = config.url + '?num=' + new Date().getTime() + (Math.random()*1000).toFixed();
+    }
 		return config;
 	},
 	err => {

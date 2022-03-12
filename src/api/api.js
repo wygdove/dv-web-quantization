@@ -29,6 +29,19 @@ export default {
         fundamental: 'lixinger/a/stock/fundamental',
 
       }
+    },
+
+
+
+
+
+    // 集思录
+    jisilu:{
+      convertibleBond:{
+        bondDetail: 'jisilu/data/cbnew/detail_hist',
+        bondPageDetail: 'jisilu/data/convert_bond_detail',
+
+      },
     }
 
 

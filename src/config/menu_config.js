@@ -71,7 +71,14 @@ const menu_config=[
     name: 'convertibleBond',
     path: '/convertibleBond',
     component: () => import('../modules/index/index'),
-    children: []
+    children: [
+      {
+        title: '可转债列表',
+        name: 'convertible_bond_list',
+        path: '/convertiblebond/convertible_bond_list',
+        component: () => import('../modules/convertiblebond/convertible_bond_list')
+      },
+    ]
   },
   {
     title: '股票',

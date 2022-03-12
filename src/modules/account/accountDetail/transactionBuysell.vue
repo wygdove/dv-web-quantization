@@ -181,11 +181,13 @@
 
       showSaveTransaction(rowdata) {
         let that=this;
+        that.getInvestment();
         if(!that.CommonUtil.isNullObj(rowdata)) {
           that.save.data={
             isBuy:rowdata.investmentBuysell<0,
             transactionCode:rowdata.transactionCode,
             transactionDate:rowdata.transactionDate,
+            investmentCode:rowdata.investmentCode,
             investmentBuysell:rowdata.investmentBuysell,
             investmentEarnHistory:rowdata.investmentEarnHistory,
             remark:rowdata.remark
